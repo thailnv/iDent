@@ -13,12 +13,9 @@
 <body>
 <div class="appointment">
     <div class="service">
-        <img src="jon-tyson-kpLEaeScdHY-unsplash.jpg" alt="" class="layer1">
-        <div class="layer2">    
             <div class="content">
                 <p>Need a doctor?</p>
                 <h2>Make An Appointment Now</h2>
-                <button onclick="getDoctorSchedule()" id="getDoctor-btn">Book now</button>
             </div>
             <div class="book-doctor">
                 <label for="service">Service</label>
@@ -38,8 +35,9 @@
                 </select>
                 <label for="phone">Enter your phone number</label>
                 <input type="text" id="phone">
+                <button onclick="getDoctorSchedule()" id="getDoctor-btn">Book now</button>
             </div>
-        </div>    
+            
     </div>
     <div class="container">
         <div class="calendar">
@@ -63,8 +61,6 @@
             <div class="days"></div>
         </div>
         <div class="schedule">
-            <img src="appointment.jpeg" alt="">
-            <div class="schedule-layer2"></div>
         </div>
     </div>
 </div>

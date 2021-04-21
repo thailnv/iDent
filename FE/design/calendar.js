@@ -126,5 +126,5 @@ function getPlanOfDay(ele){
     for(var i=0;i<plans.length;i++){
         smallPlan += `<div class = "small-plan">${plans[i]}</div>`
     }
-    document.querySelector('.schedule-layer2').innerHTML = smallPlan;
+    document.querySelector('.schedule').innerHTML = smallPlan;
 } 
