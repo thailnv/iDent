@@ -1,0 +1,12 @@
+exports.constants = {
+  //apiUrl
+  apiUrl : 'http://localhost:3000/api',
+  //action type
+  LOGIN_SUCCESS : 'LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'LOGIN_FAILURE',
+  LOGOUT: 'LOGOUT',
+  REGISTER_SUCCESS: 'REGISTER_SUCCESS',
+  REGISTER_FAILURE: 'REGISTER_FAILURE',
+  POPUP_LOGIN: 'POPUP_LOGIN',
+  HIDE_POPUP: 'HIDE_POPUP'
+}

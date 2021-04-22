@@ -1,0 +1,1024 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  background-color: transparent;
+  font-family: roboto, sans-serif; }
+
+body {
+  position: relative; }
+
+button {
+  cursor: pointer;
+  border-radius: 0.25em; }
+
+a {
+  color: #006eff; }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; }
+
+.center {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
+
+.center-text {
+  text-align: center; }
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+
+.input-error {
+  border: red solid 1px !important; }
+
+.text-error {
+  color: red; }
+
+.popup {
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4); }
+
+.block {
+  display: block; }
+
+.close-btn {
+  top: 0.5em;
+  right: 0.5em;
+  z-index: 2;
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  border-radius: 1em;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  color: #797979; }
+
+.close-btn:hover {
+  background-color: rgba(51, 51, 51, 0.2); }
+
+.home-title {
+  font-size: 28px;
+  margin-top: 1.5em;
+  width: 100%;
+  font-weight: 200;
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+  color: #333; }
+
+.home-title-sub {
+  font-size: 14px;
+  margin-top: 0.5em;
+  width: 100%;
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+  color: #42d9ff; }
+
+.login-container {
+  width: 80%;
+  height: 80%;
+  min-height: 470px;
+  min-width: 280px;
+  max-height: 700px;
+  max-width: 1500px;
+  display: flex;
+  border-radius: 0.5em;
+  overflow: hidden;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 0 0.5em #7e7e7e; }
+
+.login-container > .img-container {
+  width: 50%;
+  display: block;
+  position: relative;
+  background-color: #79acff; }
+
+.login-container > .form-container {
+  width: 50%;
+  position: relative; }
+
+.login-container > .img-container > img {
+  display: block;
+  width: 100%;
+  max-height: 100%; }
+
+.login-container > .form-container > .form {
+  width: 100%; }
+
+.form h2 {
+  margin-bottom: 0.5em; }
+
+.form > .input-container {
+  width: 80%;
+  margin: auto; }
+
+.form > .input-container > a {
+  color: #006eff;
+  display: block;
+  margin-top: 1em;
+  font-size: 0.75em; }
+
+.form > .input-container > div {
+  margin-top: 1em;
+  font-size: 0.75em; }
+
+.form > .input-container > div button {
+  color: #006eff;
+  font-size: 1em; }
+
+.form > .input-container > input,
+#login-btn,
+#signup-btn {
+  width: 100%;
+  display: block;
+  margin: auto;
+  border-radius: 0.25em; }
+
+.form > .input-container > input {
+  margin-top: 1em;
+  height: 3.5em;
+  padding: 1em;
+  border: #d6d6d6 solid 1px; }
+
+.form > .input-container > input:focus {
+  border: #006eff solid 1px; }
+
+.form > .input-container > .row > div {
+  width: 60%;
+  text-align: right; }
+
+#login-btn,
+#signup-btn {
+  height: 3em;
+  color: white;
+  margin-top: 1em;
+  background-color: #006eff; }
+
+#login-btn:hover,
+#signup-btn:hover {
+  background-color: #3289fa; }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .login-container > .img-container {
+    width: 0%; }
+  .login-container > .form-container {
+    width: 100%;
+    position: relative;
+    margin: auto; }
+  .form > .input-container {
+    width: 90%;
+    margin: auto; }
+  .form > .input-container > .row {
+    flex-direction: column; }
+  .form > .input-container > .row > div {
+    text-align: center;
+    width: 100%; }
+  #signup-btn {
+    margin-top: 1em;
+    margin-left: 0;
+    width: 100%; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .login-container > .img-container {
+    width: 0%; }
+  .login-container > .form-container {
+    width: 80%;
+    position: relative;
+    margin: auto; }
+  .form > .input-container > .row {
+    flex-direction: column; }
+  .form > .input-container > .row > div {
+    text-align: center;
+    width: 100%; }
+  #signup-btn {
+    margin-top: 1em;
+    margin-left: 0;
+    width: 100%; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .login-container > .img-container {
+    width: 40%; }
+  .login-container > .form-container {
+    width: 60%; }
+  #signup-btn {
+    margin-top: 1em;
+    margin-left: 0;
+    width: 100%; } }
+
+@media only screen and (max-height: 450px) {
+  .login-container {
+    top: 0;
+    transform: translate(-50%, 0); } }
+
+.nav {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  max-height: 4em;
+  width: 100%;
+  z-index: 3; }
+
+.logo {
+  padding-left: 2em;
+  width: 25%; }
+
+.logo img {
+  width: 120px; }
+
+.dropdown-container {
+  margin-left: auto;
+  margin-right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.nav .dropdown {
+  margin-left: 3em;
+  position: relative; }
+
+.nav .dropdown .dropdown-btn {
+  color: whitesmoke;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 4em;
+  display: block; }
+
+.nav .dropdown .dropdown-btn:hover {
+  color: #e0e0e0; }
+
+.dropdown-list {
+  width: auto;
+  z-index: 2;
+  display: none;
+  opacity: 0;
+  transition: opacity 1s;
+  position: absolute;
+  background-color: white;
+  padding-right: 0.5em;
+  border-radius: 0.25em;
+  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.5); }
+
+.dropdown:hover .dropdown-list {
+  display: block;
+  opacity: 1; }
+
+.dropdown-item:first-of-type {
+  padding-top: 1em; }
+
+.dropdown-item {
+  padding-bottom: 1em;
+  padding-left: 1em;
+  display: block;
+  color: #3c3f42;
+  font-size: 0.875em; }
+
+a.dropdown-item {
+  min-width: 12em; }
+
+button.dropdown-item {
+  min-width: 10em; }
+
+.dropdown-item:hover {
+  color: #2d7bc4; }
+
+#account-btn {
+  border: #568ed8 2px solid;
+  border-radius: 2em;
+  height: 3em;
+  width: 10em;
+  margin-right: 2em;
+  color: whitesmoke;
+  font-weight: 600;
+  font-size: 14px; }
+
+@media only screen and (max-width: 600px) {
+  .logo {
+    padding-left: 0em;
+    width: 100%; }
+  .dropdown-container {
+    width: 0%; }
+  .nav .dropdown {
+    margin-left: 2em; }
+  #account-btn {
+    margin-right: 0em;
+    width: 8em; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .logo {
+    padding-left: 0em;
+    display: none; }
+  .dropdown-container {
+    width: 100%; }
+  .nav .dropdown {
+    margin-left: 2em; }
+  #account-btn {
+    margin-right: 0em;
+    width: 8em; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .logo {
+    padding-left: 0em;
+    width: 15%; }
+  .nav .dropdown {
+    margin-left: 2em; }
+  #account-btn {
+    margin-right: 0em;
+    width: 8em; } }
+
+.banner {
+  width: 100%;
+  height: 50vh;
+  position: relative; }
+
+.banner > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; }
+
+.banner > div {
+  position: absolute;
+  box-shadow: inset 0 0 100em black;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%; }
+
+@media only screen and (max-width: 600px) {
+  .banner > div {
+    box-shadow: inset 0 0 8em black; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .banner > div {
+    box-shadow: inset 0 0 10em black; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .banner > div {
+    box-shadow: inset 0 0 15em black; } }
+
+.footer {
+  position: relative;
+  height: 23em;
+  width: 100%;
+  padding-left: 6%;
+  padding-right: 6%;
+  display: flex;
+  justify-content: space-between; }
+
+.footer__contact {
+  width: 19em;
+  height: 22em;
+  background: #3c3f42;
+  padding-left: 2.5em;
+  padding-right: 3.5em;
+  padding-top: 2.5em;
+  font-weight: 300;
+  color: #dededebd;
+  border-radius: 0.25em; }
+
+.footer__contact > .content {
+  text-align: justify;
+  font-size: 14px;
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+  line-height: 1.5em; }
+
+.footer__contact > h4 {
+  margin-top: 1em; }
+
+.footer__contact > h4 {
+  font-size: 19px;
+  font-weight: 200; }
+
+.footer__contact > h4 > i {
+  background-color: #5bc198;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  font-size: 14px;
+  margin-right: 1em;
+  color: white; }
+
+.footer__link {
+  margin-top: 6em; }
+
+.footer__link > .link-title {
+  color: #5bc198;
+  font-size: 1.125em;
+  margin-bottom: 1em; }
+
+.footer__link > a:first-of-type {
+  margin-top: 2em; }
+
+.footer__link > a {
+  display: block;
+  text-decoration: none;
+  color: #dededebd;
+  font-size: 13px;
+  margin-bottom: 1.5em;
+  font-weight: 300; }
+
+.footer__link > a:hover {
+  color: #5bc198; }
+
+.footer__link > a > i {
+  margin-right: 1em; }
+
+.footer__link > .footer-button {
+  width: 11em;
+  height: 3.5em;
+  background-color: transparent;
+  color: #5bc198;
+  border: #5bc198 1.5px solid;
+  border-radius: 0.25em;
+  margin-bottom: 1em;
+  display: block; }
+
+.footer__link > .footer-button:hover {
+  box-shadow: 0 0 8px rgba(48, 134, 8, 0.8); }
+
+.footer__link > .visit-btn {
+  background-color: #5bc198;
+  border: none;
+  color: white;
+  border-radius: 0.25em;
+  width: 2em;
+  height: 2em;
+  margin-right: 0.5em; }
+
+.footer .line {
+  height: 0.25em;
+  background: #3c3f42; }
+
+@media only screen and (max-width: 600px) {
+  .footer {
+    padding-left: 2%;
+    padding-right: 2%;
+    height: 18em;
+    justify-items: center;
+    justify-content: space-evenly; }
+  .footer__contact {
+    width: 12em;
+    height: 14em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.5em;
+    font-weight: 300; }
+  .footer__contact > .content {
+    display: none; }
+  .footer__contact > h4 {
+    margin-top: 1em;
+    font-size: 16px;
+    font-weight: 200; }
+  .footer__contact > h4 > i {
+    background-color: #5bc198;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    font-size: 12px;
+    margin-right: 1em;
+    color: white; }
+  .footer-test-link {
+    display: none; }
+  .footer-test-combo {
+    display: none; }
+  .footer__link {
+    margin-top: 2em; }
+  .footer__contact img {
+    width: 7em; }
+  .footer__link > .footer-button {
+    width: 8em;
+    height: 2.5em; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 601px) and (max-width: 768px) {
+  .footer-test-link {
+    display: none; }
+  .footer {
+    padding-left: 2%;
+    padding-right: 2%; }
+  .footer__contact {
+    width: 16em;
+    height: 20em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-top: 1.5em; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .footer {
+    padding-left: 2%;
+    padding-right: 2%; }
+  .footer__contact {
+    width: 16em;
+    height: 20em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-top: 1.5em; }
+  .footer__link > .footer-button {
+    width: 8em;
+    height: 2.5em; } }
+
+@media only screen and (min-width: 1500px) {
+  .footer {
+    padding-left: 16%;
+    padding-right: 16%; } }
+
+.skill {
+  width: 100%;
+  padding: 0.5em;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.skill-card {
+  margin: auto;
+  margin-top: 1em;
+  box-shadow: 0 0 0.5em #7e7e7e;
+  padding: 0.5em;
+  width: 20vw;
+  height: 15em;
+  border-radius: 0.25em;
+  background-color: white;
+  z-index: 2;
+  overflow: hidden;
+  position: relative; }
+
+.skill-card > .name {
+  font-size: 22px;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  font-weight: normal;
+  font-style: normal;
+  text-align: center;
+  font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+  color: #3c3f42; }
+
+.skill-description {
+  text-align: center;
+  font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+  font-size: 13px;
+  color: #868686;
+  line-height: 1.5em;
+  padding-left: 0.75em;
+  padding-right: 0.75em; }
+
+.skill-card img {
+  width: 4.5em;
+  margin-left: auto;
+  margin-right: auto;
+  display: block; }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .skill-card {
+    width: 70vw;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .skill-card {
+    width: 35vw; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .skill {
+    padding-left: 15%;
+    padding-right: 15%; }
+  .skill-card {
+    width: 32vw; } }
+
+.dentist-list {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  background-image: url(https://dental-clinic.cmsmasters.net/wp-content/uploads/2015/07/content-dot2.jpg); }
+  .dentist-list #preBtn,
+  .dentist-list #nextBtn {
+    top: 53%;
+    z-index: 1;
+    opacity: 0.4;
+    width: 1.25em;
+    height: 2.5em;
+    color: black;
+    font-size: 1.25em;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3); }
+  .dentist-list #preBtn {
+    left: 5.5em; }
+  .dentist-list #nextBtn {
+    right: 5.5em; }
+  .dentist-list .slider-container {
+    margin: auto;
+    width: 90%;
+    padding: 3%;
+    display: flex;
+    padding-top: 2em;
+    position: relative;
+    justify-content: space-around; }
+    .dentist-list .slider-container .card-container {
+      padding: 1em; }
+      .dentist-list .slider-container .card-container .dentist-card {
+        border-radius: 0.25em;
+        background-color: white;
+        z-index: 2;
+        position: relative;
+        border: white 0.5em solid;
+        border: #d6d6d6 solid 1px; }
+        .dentist-list .slider-container .card-container .dentist-card .name {
+          font-size: 20px;
+          margin-top: 1.5em;
+          font-weight: normal;
+          font-style: normal;
+          font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+          color: #474747; }
+        .dentist-list .slider-container .card-container .dentist-card .img-container {
+          width: 13em;
+          height: 13em;
+          margin: auto;
+          margin-top: 2em;
+          overflow: hidden;
+          border-radius: 10em; }
+          .dentist-list .slider-container .card-container .dentist-card .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%; }
+        .dentist-list .slider-container .card-container .dentist-card .title {
+          font-size: 15px;
+          margin-top: 0.5em;
+          margin-bottom: 1.25em;
+          color: #42d9ff; }
+        .dentist-list .slider-container .card-container .dentist-card .dentist-info {
+          text-align: center;
+          font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
+          font-size: 13px;
+          color: #868686;
+          line-height: 1.5em;
+          padding-left: 2.5em;
+          padding-right: 2.5em;
+          margin-bottom: 2em; }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .dentist-list #preBtn {
+    left: 1.5em; }
+  .dentist-list #nextBtn {
+    right: 1.5em; }
+  .dentist-list .slider-container {
+    margin: auto;
+    width: 80%;
+    padding: 3%;
+    padding-top: 2em;
+    position: relative; }
+    .dentist-list .slider-container .card-container {
+      padding: 1em; }
+      .dentist-list .slider-container .card-container .dentist-card {
+        border-radius: 0.25em;
+        background-color: white;
+        z-index: 2;
+        position: relative;
+        border: white 0.5em solid;
+        border: #d6d6d6 solid 1px; }
+        .dentist-list .slider-container .card-container .dentist-card .img-container {
+          width: 13em;
+          height: 13em;
+          margin: auto;
+          margin-top: 2em;
+          overflow: hidden;
+          border-radius: 10em; }
+          .dentist-list .slider-container .card-container .dentist-card .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .dentist-list #preBtn {
+    left: 1.5em; }
+  .dentist-list #nextBtn {
+    right: 1.5em; }
+  .dentist-list .slider-container {
+    margin: auto;
+    width: 90%;
+    padding: 3%;
+    padding-top: 2em;
+    position: relative; }
+    .dentist-list .slider-container .card-container {
+      padding: 0.5em; }
+      .dentist-list .slider-container .card-container .dentist-card {
+        border-radius: 0.25em;
+        background-color: white;
+        z-index: 2;
+        position: relative;
+        border: white 0.5em solid;
+        border: #d6d6d6 solid 1px; }
+        .dentist-list .slider-container .card-container .dentist-card .img-container {
+          width: 13em;
+          height: 13em;
+          margin: auto;
+          margin-top: 2em;
+          overflow: hidden;
+          border-radius: 10em; }
+          .dentist-list .slider-container .card-container .dentist-card .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .dentist-list #preBtn {
+    left: 2.5em; }
+  .dentist-list #nextBtn {
+    right: 2.5em; }
+  .dentist-list .slider-container {
+    margin: auto;
+    width: 80%;
+    padding: 3%;
+    padding-top: 2em;
+    position: relative; }
+    .dentist-list .slider-container .card-container {
+      padding: 1em; }
+      .dentist-list .slider-container .card-container .dentist-card {
+        border-radius: 0.25em;
+        background-color: white;
+        z-index: 2;
+        position: relative;
+        border: white 0.5em solid;
+        border: #d6d6d6 solid 1px; }
+        .dentist-list .slider-container .card-container .dentist-card .img-container {
+          width: 13em;
+          height: 13em;
+          margin: auto;
+          margin-top: 2em;
+          overflow: hidden;
+          border-radius: 10em; }
+          .dentist-list .slider-container .card-container .dentist-card .img-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%; } }
+
+.clinic-info {
+  width: 84%;
+  border-radius: 0.25em;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  overflow: hidden;
+  margin-top: 1em;
+  margin-bottom: 1em; }
+
+.clinic-info > .news {
+  background-color: #32dac3;
+  width: 25%;
+  padding: 2em; }
+
+.clinic-info > .news > p {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em; }
+
+.clinic-info > .news a {
+  color: white;
+  font-size: 14px; }
+
+.clinic-info > .opening-info {
+  background-color: #32b8da;
+  padding: 2em;
+  width: 25%; }
+
+.clinic-info > .opening-info > .info {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5em; }
+
+.clinic-info > .department-info {
+  background-color: #07a7e3;
+  padding: 2em;
+  width: 50%; }
+
+.clinic-info .line {
+  height: 1px;
+  color: white;
+  display: block;
+  margin: 0.5em; }
+
+.clinic-info .title {
+  color: white;
+  margin-bottom: 1.5em;
+  font-size: 24px; }
+
+.clinic-info > .department-info .department-name {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5em;
+  margin-bottom: 1.25em; }
+
+.clinic-number {
+  text-align: center;
+  width: 100%;
+  background-image: url(https://dental-clinic.cmsmasters.net/wp-content/uploads/2015/07/content-prlx.jpg);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+  padding: 3em; }
+  .clinic-number .home-title {
+    color: white;
+    margin-top: 0; }
+  .clinic-number .home-title-sub {
+    color: white; }
+  .clinic-number .card-container {
+    width: 85%;
+    margin: auto;
+    margin-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; }
+    .clinic-number .card-container .container {
+      border: #d6d6d6 solid 1px;
+      border-radius: 0.5em;
+      width: 12em;
+      height: 12em;
+      background-color: rgba(226, 226, 226, 0.2);
+      overflow: hidden; }
+      .clinic-number .card-container .container .img-container {
+        width: 20%;
+        margin: auto;
+        margin-top: 2em;
+        margin-bottom: 1.5em; }
+        .clinic-number .card-container .container .img-container img {
+          width: 100%; }
+      .clinic-number .card-container .container .info,
+      .clinic-number .card-container .container .title {
+        color: white; }
+      .clinic-number .card-container .container .info {
+        font-size: 2em; }
+      .clinic-number .card-container .container .title {
+        margin-top: 0.5em;
+        font-size: 14px; }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .clinic-info > .news {
+    background-color: #32dac3;
+    width: 100%;
+    padding: 2em;
+    padding-left: 2.5em;
+    padding-right: 2.5em; }
+  .clinic-info > .opening-info {
+    background-color: #32b8da;
+    padding: 2em;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
+    width: 100%; }
+  .clinic-info > .department-info {
+    background-color: #07a7e3;
+    padding: 2em;
+    width: 100%; }
+  .clinic-number {
+    text-align: center;
+    width: 100%;
+    padding: 3em;
+    padding-left: 0em;
+    padding-right: 0em; }
+    .clinic-number .card-container {
+      width: 100%;
+      margin: auto;
+      margin-top: 2em;
+      display: flex;
+      justify-content: center; }
+      .clinic-number .card-container .container {
+        border: #d6d6d6 solid 1px;
+        border-radius: 0.5em;
+        width: 11em;
+        height: 11em;
+        background-color: rgba(226, 226, 226, 0.2);
+        overflow: hidden;
+        margin-top: 1em; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .clinic-info {
+    width: 80%; }
+    .clinic-info .news {
+      background-color: #32dac3;
+      width: 50%;
+      padding: 2em;
+      padding-left: 0.5em;
+      padding-right: 0.5em; }
+    .clinic-info .opening-info {
+      background-color: #32b8da;
+      padding: 2em;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      width: 50%; }
+    .clinic-info .department-info {
+      background-color: #07a7e3;
+      padding: 2em;
+      width: 100%; }
+  .clinic-number {
+    text-align: center;
+    width: 100%;
+    padding: 3em;
+    padding-left: 1em;
+    padding-right: 1em; }
+    .clinic-number .card-container {
+      width: 100%;
+      margin: auto;
+      margin-top: 2em;
+      display: flex;
+      justify-content: center; }
+      .clinic-number .card-container .container {
+        border: #d6d6d6 solid 1px;
+        border-radius: 0.5em;
+        width: 11em;
+        height: 11em;
+        background-color: rgba(226, 226, 226, 0.2);
+        overflow: hidden;
+        margin-top: 1em; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .clinic-info {
+    width: 75%; }
+    .clinic-info .news {
+      background-color: #32dac3;
+      width: 50%;
+      padding: 2em; }
+    .clinic-info .opening-info {
+      background-color: #32b8da;
+      padding: 2em;
+      width: 50%; }
+    .clinic-info .department-info {
+      background-color: #07a7e3;
+      padding: 2em;
+      width: 100%; }
+  .clinic-number {
+    text-align: center;
+    width: 100%;
+    padding: 3em;
+    padding-left: 1em;
+    padding-right: 1em; }
+    .clinic-number .card-container {
+      width: 100%;
+      margin: auto;
+      margin-top: 2em;
+      display: flex;
+      justify-content: center; }
+      .clinic-number .card-container .container {
+        border: #d6d6d6 solid 1px;
+        border-radius: 0.5em;
+        width: 11em;
+        height: 11em;
+        background-color: rgba(226, 226, 226, 0.2);
+        overflow: hidden;
+        margin-top: 1em; } }
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  position: relative; }
