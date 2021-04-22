@@ -38,10 +38,10 @@ bower_components
 build/Release
 
 # Dependency directories
-BE/node_modules/
-BE/jspm_packages/
-FE/node_modules/
-FE/jspm_packages/
+ident_server/node_modules/
+ident_server/jspm_packages/
+ident_ui/node_modules/
+ident_ui/jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
