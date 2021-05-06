@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "6092962938f83941e89ed8b8"
+  },
+  "name": "First Professional Degree",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6092966f4bac6430582aa6c7"
+  },
+  "name": "Doctorate"
+},{
+  "_id": {
+    "$oid": "6092967a4bac6430582aa6c8"
+  },
+  "name": "Master"
+}]

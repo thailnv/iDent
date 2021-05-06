@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "6092a163260dfe075c02cf59"
+  },
+  "name": "Teeth whitening"
+},{
+  "_id": {
+    "$oid": "6092a172260dfe075c02cf5a"
+  },
+  "name": "Implants"
+},{
+  "_id": {
+    "$oid": "6092a17b260dfe075c02cf5b"
+  },
+  "name": "Orthodontics"
+},{
+  "_id": {
+    "$oid": "6092a1b2260dfe075c02cf5c"
+  },
+  "name": "Fillings"
+}]

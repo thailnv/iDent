@@ -1,8 +1,16 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const validator = require("../middleware/validate");
+const { validate } = require("../models/appointmentModel");
+const auth = require("../middleware/auth");
+const { scheduleEmail } = require("../middleware/mailService");
+const controller = require("../controllers/appointmentController");
 
-const appointmentController = require('../controllers/appointmentController');
+router.post("/", validator(validate), scheduleEmail, controller.addOne);
+router.use(auth.protect);
+router.get("/by_email", controller.getOneByEmail);
+router.get("/:id", controller.getOne);
+router.use(auth.restrictTo("admin"));
+router.get("/", controller.getAll);
 
-router.post('/', appointmentController.createAppointment);
-
-module.exports = router
+module.exports = router;

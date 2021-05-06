@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "6067c63e9d56c60614ac3c32"
+  },
+  "password": "/.TahSUy7SaHksiCROmC.sycDh9yVqm",
+  "role": "admin",
+  "googleID": "",
+  "name": "Thai lu Ngoc Vinh",
+  "email": "thailnv263@gmail.com"
+},{
+  "_id": {
+    "$oid": "6067caad2579b8348cfb9757"
+  },
+  "password": "/.TahSUy7SaHksiCROmC.sycDh9yVqm",
+  "role": "guest",
+  "googleID": "",
+  "name": "Bui Nhat TIen",
+  "email": "tiengosao@gmail.com"
+},{
+  "_id": {
+    "$oid": "6067d0072579b8348cfb9758"
+  },
+  "password": "H7i2SpVy4u9oyWlZ0L7L6HypBGNTK/K",
+  "role": "guest",
+  "googleID": "",
+  "name": "Bui Nhat TIen",
+  "email": "tiengosa@gmail.com"
+}]

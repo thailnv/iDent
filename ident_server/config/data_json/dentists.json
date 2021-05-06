@@ -1,0 +1,76 @@
+[{
+  "_id": {
+    "$oid": "6092a23d260dfe075c02cf5e"
+  },
+  "expert": [
+    {
+      "$oid": "6092a163260dfe075c02cf59"
+    },
+    {
+      "$oid": "6092a172260dfe075c02cf5a"
+    },
+    {
+      "$oid": "6092a17b260dfe075c02cf5b"
+    }
+  ],
+  "name": "Johnny Cage",
+  "degree": {
+    "$oid": "6092966f4bac6430582aa6c7"
+  },
+  "idNumber": "321594694",
+  "phone": "0357857087"
+},{
+  "_id": {
+    "$oid": "6092a86a260dfe075c02cf5f"
+  },
+  "expert": [
+    {
+      "$oid": "6092a1b2260dfe075c02cf5c"
+    },
+    {
+      "$oid": "6092a17b260dfe075c02cf5b"
+    }
+  ],
+  "name": "Will Smith",
+  "degree": {
+    "$oid": "6092966f4bac6430582aa6c7"
+  },
+  "idNumber": "321594894",
+  "phone": "0357857086"
+},{
+  "_id": {
+    "$oid": "6092a899260dfe075c02cf60"
+  },
+  "expert": [
+    {
+      "$oid": "6092a163260dfe075c02cf59"
+    },
+    {
+      "$oid": "6092a17b260dfe075c02cf5b"
+    }
+  ],
+  "name": "Will Smith",
+  "degree": {
+    "$oid": "6092967a4bac6430582aa6c8"
+  },
+  "idNumber": "321594894",
+  "phone": "0357857086"
+},{
+  "_id": {
+    "$oid": "6092a8da260dfe075c02cf61"
+  },
+  "expert": [
+    {
+      "$oid": "6092a1b2260dfe075c02cf5c"
+    },
+    {
+      "$oid": "6092a172260dfe075c02cf5a"
+    }
+  ],
+  "name": "Dung CT",
+  "degree": {
+    "$oid": "6092962938f83941e89ed8b8"
+  },
+  "idNumber": "321594894",
+  "phone": "0357857086"
+}]
