@@ -67,64 +67,38 @@ document.querySelector('.next-btn').addEventListener('click',()=>{
 });
 renderCalendar();
 
-var doctor =
-{
-        name: 'Tyler',
-        plan: [
-            {
-                date:'2021-4-17',
-                hour:[
-                    '8:00',
-                    '14:00',
-                    '19:00'
-                ]
-            },
-            {
-                date:'2021-4-15',
-                hour:[
-                    '8:00',
-                    '14:00',
-                    '15:00'
-                ]
-            },
-            {
-                date:'2021-4-20',
-                hour:[
-                    '9:00',
-                    '14:00',
-                    '20:00'
-                ]
-            },
-            {
-                date:'2021-4-30',
-                hour:[
-                    '5:00',
-                    '14:00',
-                ]
-            },
-            {
-                date:'2021-4-25',
-                hour:[
-                    '10:00',
-                    '19:00'
-                ]
-            }
-        ]
-    }
 
+ const doctorID = '6092a8da260dfe075c02cf61';
+ var schedule = [];
 function getDoctorSchedule(){
-    console.log(doctor.plan.length);
-    for(var i=0;i<doctor.plan.length;i++){
-        document.getElementById(doctor.plan[i].date).classList.add('day-have-plan');
-    }
+  const url = 'http://localhost:3000/api/schedules'
+  fetch(`${url}?dentist=${doctorID}`)
+  .then(res => res.json())
+  .then(data=>{
+        schedule = data;
+        for(var i = 0 ;i<schedule.doc.length;i++){
+            var day = `${schedule.doc[i].year}-${schedule.doc[i].month}-${schedule.doc[i].day}`;
+            console.log(typeof(day))
+            console.log(day)
+            document.getElementById(day).classList.add('day-have-plan');
+        }
+        console.log(schedule);
+  })
+    
 }
 function getPlanOfDay(ele){
-    var pos = doctor.plan.map(function(e){return e.date;})
-.indexOf(ele.id);
-    var plans = doctor.plan[pos].hour;
     var smallPlan = "";
-    for(var i=0;i<plans.length;i++){
-        smallPlan += `<div class = "small-plan">${plans[i]}</div>`
+    for(var i = 0 ;i<schedule.doc.length;i++)
+    {
+        var day = `${schedule.doc[i].year}-${schedule.doc[i].month}-${schedule.doc[i].day}`;
+        if(ele.id == day)
+        {
+            var shifts = schedule.doc[i].shifts;
+            for(var i=0;i<shifts.length;i++){
+                smallPlan += `<div class = "small-plan">${shifts[i].from}-${shifts[i].to}</div>`
+            }
+        }
     }
     document.querySelector('.schedule').innerHTML = smallPlan;
 } 
+
