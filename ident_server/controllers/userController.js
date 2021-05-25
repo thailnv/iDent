@@ -8,6 +8,9 @@ const bcrypt = require("bcryptjs");
 const { User } = require("../models/userModel");
 const base = require("./baseController");
 
+const { sendEmail } = require("../middleware/mailService");
+const { create } = require("lodash");
+
 const createToken = (user) => {
   return jwt.sign({ user }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRED_TIME,
@@ -35,7 +38,6 @@ exports.signup = async (req, res, next) => {
 
       //remove password before send response to client
       user.password = undefined;
-
       res.status(201).json({
         status: "success",
         token,
@@ -106,6 +108,32 @@ exports.login = async (req, res, next) => {
   }
 };
 
+exports.forgorPassword = async (req, res, next) => {
+  console.log("Signup request data: ", req.body);
+  const doc = await User.findOne({ email: req.body.email });
+  if (!doc) {
+    res.status(400).json({
+      status: "fail",
+      message: "User with this email does not exist",
+    });
+  } else {
+    try {
+      const data = {
+        subject: "iDent - appoinment reminder.",
+        to: doc,
+        from: process.env.IDENT_EMAIL,
+        html:`<h2 style="display:inline-block;width:200px;height:50px;background:green;color:white;">Click on given link to reset your password</h2>`,
+      };
+      sendEmail(data);
+      //remove password before send response to client
+    } catch (err) {
+      res.status(400).send("Error");
+      console.log("userController line 43 fail to create new user");
+      console.log(err.keyValue);
+      next(err);
+    }
+  }
+};
 exports.getOne = base.getOne(User);
 
 exports.getAll = base.getAll(User);
