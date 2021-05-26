@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     googleID : {
         type: String,
         default: ""
+    },
+    resetPass : {
+        type: String,
+        default: ""
     }
 }, {
     versionKey: false

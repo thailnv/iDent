@@ -11,7 +11,9 @@ router.post('/login', userController.login);
 
 router.post('/signup', validator(validate), userController.signup);
 
-router.post('/forgot-password', userController.forgorPassword);
+router.put('/forgot-password', userController.forgorPassword);
+
+router.put('/reset-password', userController.resetPassword);
 
 router.use(auth.protect);
 

@@ -2,6 +2,8 @@ import { useSelector } from 'react-redux'
 
 import React from 'react';
 import Login from './login';
+import ForgotPass from './forgetpassword';
+
 
 function Popup(){
 
@@ -11,6 +13,7 @@ function Popup(){
 
   let currentPopup = {
     login: <Login/>,
+    forgotpass: <ForgotPass/>,
   }
 
   let className = 'popup';

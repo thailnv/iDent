@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userActions } from '../actions/userActions' 
 import { appActions } from '../actions/appActions'
 import Input from './input';
+import { constants } from '../constants';
 
 function LoginForm(props){
   const [inputs, setInputs] = useState({
@@ -43,7 +44,9 @@ function LoginForm(props){
       userActions.login(email, password)
     );
   }
-
+  function forgotPass(){
+    dispatch(appActions.changePopup(constants.POPUP_FORGOTPASS));
+  }
   return (
     <form className="form center " onSubmit={handleSubmit}>
       <div className="center-text">
@@ -67,14 +70,14 @@ function LoginForm(props){
           error= {errors.password}
           handleChange = {handleInputChange}
         />
-        <a href="/quen-mat-khau">Forgot password</a>
         <button 
           id="login-btn"
           onClick = {handleSubmit}>
           Login
         </button>
         {message && <div className="center-text text-error">Email or password incorrect!</div> }        
-        <div>Don't have an account? <button onClick={props.onToggle}>Register</button> </div>         
+        <div>Don't have an account? <button onClick={props.onToggle}>Register</button> </div> 
+        <div> <button onClick={forgotPass} style={{color:"#006eff",}}>Forgot password?</button> </div>         
       </div>
     </form>
   )

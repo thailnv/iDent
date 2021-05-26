@@ -32,6 +32,7 @@ exports.signup = async (req, res, next) => {
         email: req.body.email,
         password: req.body.googleID ? "" : req.body.password,
         googleID: req.body.googleID,
+        resetPass: req.body.resetPass,
         role: req.body.role,
       });
       const token = createToken(_.pick(user, ["_id", "role", "email"]));
@@ -108,32 +109,61 @@ exports.login = async (req, res, next) => {
   }
 };
 
-exports.forgorPassword = async (req, res, next) => {
-  console.log("Signup request data: ", req.body);
-  const doc = await User.findOne({ email: req.body.email });
-  if (!doc) {
-    res.status(400).json({
+exports.forgorPassword = async (req, res) => {
+  console.log("Signup request data: ", req.body.email);
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return res.status(400).json({
       status: "fail",
       message: "User with this email does not exist",
     });
   } else {
-    try {
+    console.log(user);
+    const token = createToken(_.pick(user, ["_id", "role", "email"]))
       const data = {
         subject: "iDent - appoinment reminder.",
-        to: doc,
+        to: user.email,
         from: process.env.IDENT_EMAIL,
-        html:`<h2 style="display:inline-block;width:200px;height:50px;background:green;color:white;">Click on given link to reset your password</h2>`,
+        html:`<h2 style="color:#777;font-size:20px;font-weight:300">Click on given link to reset your password</h2>
+                <p>reset-link:${token}</p>`,
       };
-      sendEmail(data);
-      //remove password before send response to client
-    } catch (err) {
-      res.status(400).send("Error");
-      console.log("userController line 43 fail to create new user");
-      console.log(err.keyValue);
-      next(err);
+      console.log(user)
+      user.updateOne({resetPass:token}, (err, success)=>{
+        if(err){
+          return res.status(400).json({error:'reset link error'});
+        } else{
+          sendEmail(data);
+          return res.status(201).json({success:'verify code was sent to your email'});
+        }
+      });
+}
+};
+
+exports.resetPassword = async (req,res)=>{
+  const{resetPass, newPass} = req.body;
+  if(resetPass){
+    /*jwt.verify(resetPass, (error, decodedData)=> {
+      if(error){
+        return res.status(401).json({error:'token is invalid or expired'});
+      }else{*/
+        User.findOne({resetPass: req.body.resetPass}, (error, user)=>{
+          if(error|| !user){
+            return res.status(400).json({error:'verifycode invalid'});
+          }
+          else{
+            user.updateOne({password:newPass}, (error, success)=>{
+              if(error){
+                return res.status(400).json({error:'error'});
+              }
+              else{
+                return res.status(201).json({success:'reset password success'});
+              }
+            })
+          }
+        } );
     }
   }
-};
+
 exports.getOne = base.getOne(User);
 
 exports.getAll = base.getAll(User);

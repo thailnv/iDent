@@ -15,6 +15,11 @@ export function application (state = initialState, action){
         ...state, 
         popupType : ''
       }
+    case constants.POPUP_FORGOTPASS:
+      return{
+        ...state,
+        popupType:'forgotpass',
+      }
     default: 
       return state
   }
