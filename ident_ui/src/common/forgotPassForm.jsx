@@ -1,58 +1,54 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
-import { userActions } from '../actions/userActions' 
-import { appActions } from '../actions/appActions'
 import Input from './input';
 
-function ForgotPassForm(props){
+function ForgotPassForm(props) {
   const [input, setInput] = useState({
     email: ''
   });
 
   const [errors, setErrors] = useState({});
-  const [message,setMessage] = useState('');
+  const [message, setMessage] = useState('');
   const { email } = input;
-  const dispatch = useDispatch();
 
-  function validate(){
+  function validate() {
     let err = {};
-    if(!email)
+    if (!email)
       err.email = "Please enter email!";
-      return err;
+    return err;
   }
 
-  function handleInputChange(e){
+  function handleInputChange(e) {
     const { name, value } = e.target;
-    setInput(input => ({...input, [name]: value}));
+    setInput(input => ({ ...input, [name]: value }));
   }
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
     let error = validate();
-    if(Object.keys(error).length){
+    if (Object.keys(error).length) {
       setErrors(error);
       return;
     }
-    fetch('http://localhost:3000/api/users/forgot-password', {
-  method: 'PUT', // or 'PUT'
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(input),
-})
-.then(response => response.json())
-.then(data => {
-  if(data.success){
-    console.log(data.success);
-    props.onToggle();
-  }
-  else{
-      console.log(data.message)
-      setMessage(data.message);
-      return;
-  }
-});
+    fetch('http://localhost:3001/api/users/forgot-password', {
+      method: 'PUT', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(input),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          console.log(data.success);
+          props.onToggle();
+        }
+        else {
+          console.log(data.message)
+          setMessage(data.message);
+          return;
+        }
+      });
   }
 
   return (
@@ -61,20 +57,20 @@ function ForgotPassForm(props){
         <h2>Forot Password</h2>
       </div>
       <div className="input-container">
-        <Input 
-          type="text" 
-          name="email" 
-          value= {email}
+        <Input
+          type="text"
+          name="email"
+          value={email}
           placeholder="Email"
-          error= {errors.email}
-          handleChange ={handleInputChange}
+          error={errors.email}
+          handleChange={handleInputChange}
         />
-        <button 
+        <button
           id="login-btn"
-          onClick = {handleSubmit}>
+          onClick={handleSubmit}>
           Send
         </button>
-        {message && <div className="center-text text-error">{message}</div> }             
+        {message && <div className="center-text text-error">{message}</div>}
       </div>
     </form>
   )

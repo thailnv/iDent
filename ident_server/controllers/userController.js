@@ -4,12 +4,12 @@ const { promisify } = require("util");
 const _ = require("lodash");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { create } = require("lodash");
 
 const { User } = require("../models/userModel");
 const base = require("./baseController");
-
+const c = require("../constants");
 const { sendEmail } = require("../middleware/mailService");
-const { create } = require("lodash");
 
 const createToken = (user) => {
   return jwt.sign({ user }, process.env.JWT_SECRET, {
@@ -18,12 +18,12 @@ const createToken = (user) => {
 };
 
 exports.signup = async (req, res, next) => {
-  console.log("Signup request data: ", req.body);
+  console.log("Signup data: ", req.body);
   const doc = await User.findOne({ email: req.body.email });
   if (doc) {
     res.status(400).json({
-      status: "fail",
-      message: "This email is already taken!",
+      status: c.STATUS_FAILURE,
+      message: c.MAIL_ALREADY_TAKEN_MSG,
     });
   } else {
     try {
@@ -42,14 +42,15 @@ exports.signup = async (req, res, next) => {
       res.status(201).json({
         status: "success",
         token,
-        data: {
-          user,
-        },
+        user,
       });
     } catch (err) {
-      res.status(400).send("Error");
+      res.status(500).json({
+        status: c.STATUS_FAILURE,
+        message: c.UNKNOWN_ERROR_MSG,
+      });
       console.log("userController line 43 fail to create new user");
-      console.log(err.keyValue);
+      console.log(err);
       next(err);
     }
   }
@@ -57,15 +58,39 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   if (req.body.googleID) {
-    const user = await User.findOne({ googleID: req.body.googleID });
-    if (!user) this.signup(req, res, next);
-    else {
+    let user = await User.findOne({ googleID: req.body.googleID });
+    if (!user) {
+      try {
+        user = await User.findOne({ email: req.body.email });
+        if (!user) this.signup(req, res, next);
+        else {
+          user.googleID = req.body.googleID;
+          await user.save();
+
+          user.password = undefined;
+          const token = createToken(_.pick(user, ["_id", "role", "email"]));
+
+          res.status(200).json({
+            status: c.STATUS_SUCCESS,
+            token,
+            user,
+          });
+        }
+      } catch (err) {
+        res.status(500).json({
+          status: c.STATUS_FAILURE,
+          message: c,
+          UNKNOWN_ERROR_MSG,
+        });
+        console.log(err);
+      }
+    } else {
       user.password = undefined;
 
       const token = createToken(_.pick(user, ["_id", "role", "email"]));
 
       res.status(200).json({
-        status: "success",
+        status: c.STATUS_SUCCESS,
         token,
         data: user,
       });
@@ -74,43 +99,42 @@ exports.login = async (req, res, next) => {
     try {
       const { email, password } = req.body;
 
-      //1 check if email and password exits
       if (!email || !password) {
-        res.status(404).json({
+        res.status(400).json({
+          status: c.STATUS_FAILURE,
           message: "Email and password are required!",
         });
         return;
       }
 
-      //2 check if user exist and password is correct
-      const user = await User.findOne({
-        email,
-      }).select("+password");
+      const user = await User.findOne({ email }).select("+password");
 
       if (!user || !(await user.comparePassword(password, user.password))) {
         res.status(401).send("email or password is incorrect!");
         return;
       }
 
-      //remove password before sending it to client
       user.password = undefined;
-
-      //3 all correct send jwt to the client
       const token = createToken(_.pick(user, ["_id", "role", "email"]));
 
       res.status(200).json({
         status: "success",
         token,
-        data: user,
+        user,
       });
     } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        status: c.STATUS_FAILURE,
+        message: c.UNKNOWN_ERROR_MSG,
+      });
       next(err);
     }
   }
 };
 
 exports.forgorPassword = async (req, res) => {
-  console.log("Signup request data: ", req.body.email);
+  console.log("Signup request data: ", req.body);
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return res.status(400).json({
@@ -119,50 +143,60 @@ exports.forgorPassword = async (req, res) => {
     });
   } else {
     console.log(user);
-    const token = createToken(_.pick(user, ["_id", "role", "email"]))
-      const data = {
-        subject: "iDent - appoinment reminder.",
-        to: user.email,
-        from: process.env.IDENT_EMAIL,
-        html:`<h2 style="color:#777;font-size:20px;font-weight:300">Click on given link to reset your password</h2>
-                <p>reset-link:${token}</p>`,
-      };
-      console.log(user)
-      user.updateOne({resetPass:token}, (err, success)=>{
-        if(err){
-          return res.status(400).json({error:'reset link error'});
-        } else{
-          sendEmail(data);
-          return res.status(201).json({success:'verify code was sent to your email'});
-        }
-      });
-}
+
+    let code = await bcrypt.genSalt(10);
+    const data = {
+      subject: "iDent - reset password.",
+      to: user.email,
+      from: `Nha khoa iDent <${process.env.IDENT_EMAIL}>`,
+      html: `<h2 style="color:#777;font-size:20px;font-weight:300">Use this verify code to reset your password</h2>
+                <p>Verify code: ${code}</p>`,
+    };
+    user.updateOne({ resetPass: code }, (err, success) => {
+      if (err) {
+        return res.status(400).json({ error: "reset link error" });
+      } else {
+        sendEmail(data);
+        return res
+          .status(201)
+          .json({ success: "Verify code was sent to your email" });
+      }
+    });
+  }
 };
 
-exports.resetPassword = async (req,res)=>{
-  const{resetPass, newPass} = req.body;
-  if(resetPass){
-    /*jwt.verify(resetPass, (error, decodedData)=> {
-      if(error){
-        return res.status(401).json({error:'token is invalid or expired'});
-      }else{*/
-        User.findOne({resetPass: req.body.resetPass}, (error, user)=>{
-          if(error|| !user){
-            return res.status(400).json({error:'verifycode invalid'});
-          }
-          else{
-            user.updateOne({password:newPass}, (error, success)=>{
-              if(error){
-                return res.status(400).json({error:'error'});
-              }
-              else{
-                return res.status(201).json({success:'reset password success'});
-              }
-            })
-          }
-        } );
+exports.resetPassword = async (req, res) => {
+  const { resetPass, newPass } = req.body;
+  if (resetPass) {
+    let user = await User.findOne({ resetPass: resetPass });
+    if (!user) {
+      res.status(400).json({
+        status: c.STATUS_FAILURE,
+        message: "Verify code invalid",
+      });
+    } else {
+      user.password = newPass;
+      try {
+        await user.save();
+        res.status(200).json({
+          status: c.STATUS_SUCCESS,
+          message: "Password reset successfully",
+        });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json({
+          status: c.STATUS_FAILURE,
+          message: c.UNKNOWN_ERROR_MSG,
+        });
+      }
     }
+  } else {
+    res.status(400).json({
+      status: c.STATUS_FAILURE,
+      message: "Verify code invalid",
+    });
   }
+};
 
 exports.getOne = base.getOne(User);
 

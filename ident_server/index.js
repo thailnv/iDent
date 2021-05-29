@@ -48,7 +48,7 @@ app.use("*", (req, res) => {
   res.status(400).json({ mesage: "Undefined route !" });
 });
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Listen at port ${port}`);
 });

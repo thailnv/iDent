@@ -6,25 +6,25 @@ import { appActions } from '../actions/appActions';
 import { userActions } from '../actions/userActions';
 import { constants } from '../constants';
 
-function Nav () {
+function Nav() {
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.authentication.user);
 
-  function handleLoginClick(){
+  function handleLoginClick() {
     dispatch(appActions.changePopup(constants.POPUP_LOGIN));
   }
 
-  function handleLogoutClick(){
+  function handleLogoutClick() {
     dispatch(userActions.logout());
   }
 
-  const buttonTitle = user ? 'Account info' : 'Login';
+  const buttonTitle = user ? 'Logout' : 'Login';
 
   return (
     <div className="nav">
       <div className="logo">
-        <Link to="/trang-chu"><img src="/img/logo_trans_light.png" alt=""/></Link> 
+        <Link to="/trang-chu"><img src="/img/logo_trans_light.png" alt="" /></Link>
       </div>
       <div className="dropdown-container">
         <div className="dropdown">
@@ -46,11 +46,11 @@ function Nav () {
           <Link to="/co-so-vat-chat" className="dropdown-btn">Facilities</Link>
         </div>
         <div className="dropdown">
-          <button 
-            id="account-btn" 
+          <button
+            id="account-btn"
             onClick={user ? handleLogoutClick : handleLoginClick}>
             {buttonTitle}
-          </button>  
+          </button>
         </div>
       </div>
     </div>

@@ -79,4 +79,5 @@ const scheduleEmail = async (req, res, next) => {
 };
 module.exports = {
   scheduleEmail,
+  sendEmail,
 };

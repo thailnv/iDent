@@ -1,17 +1,22 @@
+const c = require("../constants");
+
 exports.deleteOne = (Model) => async (req, res, next) => {
   try {
     const doc = await Model.findByIdAndDelete(req.params.id);
     if (!doc) {
-      res.status(404).send("No document found with that id");
+      res.status(404).json({
+        status: c.STAUTS_FAILURE,
+        message: c.DOCUMENT_NOT_FOUND_ERROR,
+      });
       return;
     }
     res.status(204).json({
-      status: "success",
+      status: c.STATUS_SUCCESS,
       data: null,
     });
   } catch (error) {
     res.status(500).json({
-      status: "fail",
+      status: c.STATUS_FAILURE,
       message: "Something went wrong please try again latter",
     });
     next(error);

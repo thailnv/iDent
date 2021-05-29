@@ -9,6 +9,7 @@
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-google-login": "^5.2.2",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -17,7 +18,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "watch": "node-sass -w src/sass -o src",
     "test": "react-scripts test",

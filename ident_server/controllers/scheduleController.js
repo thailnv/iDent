@@ -1,4 +1,5 @@
 const base = require("./baseController");
+const c = require("../constants");
 const { Schedule } = require("../models/scheduleModel");
 const { Dentist } = require("../models/dentistModel");
 const { Degree } = require("../models/degreeModel");
@@ -63,12 +64,14 @@ exports.getAll = async (req, res, next) => {
       });
     } else {
       res.status(400).json({
-        status: "Can find any doc with that id!",
+        status: c.STATUS_FAILURE,
+        message: c.DOCUMENT_NOT_FOUND_ERROR,
       });
     }
   } catch (error) {
-    res.status(400).json({
-      error: "Server can handle this request right now!",
+    res.status(500).json({
+      status: c.STATUS_FAILURE,
+      message: c.UNKNOWN_ERROR_MSG,
     });
     next(error);
   }

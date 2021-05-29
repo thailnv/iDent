@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { userActions } from '../actions/userActions' 
-import { appActions } from '../actions/appActions'
+import { userActions } from '../actions/userActions';
+import GoogleLogin from './googleLogin';
+import { appActions } from '../actions/appActions';
 import Input from './input';
 import { constants } from '../constants';
 
-function LoginForm(props){
+function LoginForm(props) {
   const [inputs, setInputs] = useState({
     email: '',
     password: ''
@@ -19,24 +20,24 @@ function LoginForm(props){
 
   const message = useSelector(store => store.authentication.message);
 
-  function validate(){
+  function validate() {
     let err = {};
-    if(!email)
+    if (!email)
       err.email = "Please enter email!";
-    if(!password)
+    if (!password)
       err.password = "Please enter password!";
     return err;
   }
 
-  function handleInputChange(e){
+  function handleInputChange(e) {
     const { name, value } = e.target;
-    setInputs(inputs => ({...inputs, [name]: value}));
+    setInputs(inputs => ({ ...inputs, [name]: value }));
   }
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
     let error = validate();
-    if(Object.keys(error).length){
+    if (Object.keys(error).length) {
       setErrors(error);
       return;
     }
@@ -44,7 +45,7 @@ function LoginForm(props){
       userActions.login(email, password)
     );
   }
-  function forgotPass(){
+  function forgotPass() {
     dispatch(appActions.changePopup(constants.POPUP_FORGOTPASS));
   }
   return (
@@ -54,30 +55,31 @@ function LoginForm(props){
         <div>Welcome to iDent!</div>
       </div>
       <div className="input-container">
-        <Input 
-          type="text" 
-          name="email" 
-          value= {email}
+        <Input
+          type="text"
+          name="email"
+          value={email}
           placeholder="Email"
-          error= {errors.email}
-          handleChange ={handleInputChange}
+          error={errors.email}
+          handleChange={handleInputChange}
         />
-        <Input 
-          type="password"  
-          name="password" 
+        <Input
+          type="password"
+          name="password"
           value={password}
-          placeholder="Password" 
-          error= {errors.password}
-          handleChange = {handleInputChange}
+          placeholder="Password"
+          error={errors.password}
+          handleChange={handleInputChange}
         />
-        <button 
+        <button
           id="login-btn"
-          onClick = {handleSubmit}>
+          onClick={handleSubmit}>
           Login
         </button>
-        {message && <div className="center-text text-error">Email or password incorrect!</div> }        
-        <div>Don't have an account? <button onClick={props.onToggle}>Register</button> </div> 
-        <div> <button onClick={forgotPass} style={{color:"#006eff",}}>Forgot password?</button> </div>         
+        {message && <div className="center-text text-error">Email or password incorrect!</div>}
+        <div>Don't have an account? <button onClick={props.onToggle}>Register</button> </div>
+        <div> <button onClick={forgotPass} style={{ color: "#006eff", }}>Forgot password?</button> </div>
+        <GoogleLogin />
       </div>
     </form>
   )

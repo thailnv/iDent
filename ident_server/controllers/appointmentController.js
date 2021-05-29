@@ -12,14 +12,21 @@ exports.getOneByEmail = async (req, res, next) => {
     console.log(req.user);
     const doc = await Appointment.find({ email: req.user.email }).lean();
     if (!doc) {
-      res.status(404).send("No appointment found with that email");
+      res.status(404).json({
+        message: c.APPOINTMENT_NOT_FOUND_MSG,
+      });
       return;
     }
     res.status(200).json({
-      status: "success",
+      status: c.STATUS_SUCCESS,
       data: doc,
     });
   } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      status: c.STATUS_FAILURE,
+      message: c.UNKNOWN_ERROR_MSG,
+    });
     next(error);
   }
 };
