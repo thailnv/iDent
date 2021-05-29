@@ -7,17 +7,11 @@ import ServiceList from '../components/listService';
 import DentistList from '../components/listDentist';
 import ClinicInfo from '../components/clinicInfo';
 import IdentInNumber from '../components/identInNumber';
+import Appointment from '../components/appointment';
 function HomePage(){
   return (
     <React.Fragment>
-      <Nav/>
-      <Banner/>
-      <ServiceList/>
-      <ClinicInfo/>
-      <DentistList/>
-      <IdentInNumber/>
-      <Popup/>
-      <Footer/>
+      <Appointment/>
     </React.Fragment>
   )
 }
