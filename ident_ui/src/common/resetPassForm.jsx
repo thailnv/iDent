@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
+import {  useDispatch } from 'react-redux';
+import { appActions } from '../actions/appActions';
+import { constants } from '../constants';
 import Input from './input';
 
 function ResetPassForm(props) {
+
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     resetPass: '',
     newPass: '',
@@ -10,6 +15,10 @@ function ResetPassForm(props) {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
   const { resetPass, newPass } = inputs;
+
+  function handleLoginClick() {
+    dispatch(appActions.changePopup(constants.POPUP_LOGIN));
+  }
 
   function validate() {
     let err = {};
@@ -43,6 +52,9 @@ function ResetPassForm(props) {
       .then(data => {
         console.log(data);
         setMessage(data);
+        if(data.status==="success")
+          handleLoginClick();
+          alert(data.message);
         return;
       });
   }

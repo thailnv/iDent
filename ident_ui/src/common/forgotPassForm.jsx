@@ -10,6 +10,7 @@ function ForgotPassForm(props) {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
   const { email } = input;
+  
 
   function validate() {
     let err = {};
@@ -42,6 +43,7 @@ function ForgotPassForm(props) {
         if (data.success) {
           console.log(data.success);
           props.onToggle();
+          alert(data.success);
         }
         else {
           console.log(data.message)
@@ -54,7 +56,7 @@ function ForgotPassForm(props) {
   return (
     <form className="form center " onSubmit={handleSubmit}>
       <div className="center-text">
-        <h2>Forot Password</h2>
+        <h2>Forgot Password</h2>
       </div>
       <div className="input-container">
         <Input
