@@ -231,8 +231,17 @@
   display: flex;
   position: relative;
   flex-wrap: wrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  padding: 1em;
+  .shift {
+    display: block;
+    font-size: 18px;
+    margin-top: 1em;
+    label {
+      margin-left: 0.5em;
+    }
+  }
 }
 .schedule img {
   width: 100%;
@@ -268,6 +277,9 @@
   background: #57aee0;
   color: white;
   border-radius: 10px;
+}
+.shift {
+  display: block;
 }
 .small-plan:hover {
   background: #68c4fa;

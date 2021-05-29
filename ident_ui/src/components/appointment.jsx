@@ -6,7 +6,6 @@ import { dentistActions } from "../actions/dentistAction";
 import { serviceActions } from "../actions/serviceActions";
 import Input from '../common/input';
 import Calendar from './calendar';
-import AppointmentForm from './appointmentform';
 import { constants } from '../constants';
 
 function Appointment() {
@@ -14,10 +13,7 @@ function Appointment() {
     const [errors, setErrors] = useState({});
 
     const schedule = useSelector(state => state.dentist.schedule);
-
-    const [showPlans, setShowPlans] = useState(false);
-    const [showConfirmForm, setShowConfirmForm] = useState(false);
-    const [time, setTime] = useState();
+    const [shift, setShift] = useState([]);
 
     const [currentDentists, setCurrentDentists] = useState([]);
     const [currentServices, setCurrentServices] = useState([]);
@@ -41,19 +37,23 @@ function Appointment() {
                 setCurrentServices(services);
             }
     }, [dentists, dentistStatus, serviceStatus, services, dispatch])
-
     function handleInputChange(e) {
         const { name, value } = e.target;
         setInput(input => ({ ...input, [name]: value }));
     }
-
+    function handleShilfDisplay(date) {
+        console.log(date);
+        let selectedSchedule = schedule.filter(v => date === `${v.year}-${v.month}-${v.day}`);
+        console.log(selectedSchedule[0].shifts);
+        setShift(selectedSchedule[0].shifts);
+        console.log(shift);
+    }
     function validate() {
         let err = {};
         if (!email)
             err.email = "Please enter email!";
         return err;
     }
-
     function handleSubmit(e) {
         e.preventDefault();
         let error = validate();
@@ -63,14 +63,9 @@ function Appointment() {
         }
     }
 
-    function confirmInfor(e) {
-        console.log(e.target.id);
-        setTime(e.target.id);
-        setShowConfirmForm(true);
-    }
-
     function handleServiceChange(e) {
         let serviceID = e.target.value;
+        setShift([]);
         let lstDentists = dentists.filter(v => {
             let isOk = false;
             for (let i = 0; i < v.expert.length; i++)
@@ -80,9 +75,9 @@ function Appointment() {
         });
         setCurrentDentists(lstDentists);
     }
-
     function handleDentistChange(e) {
         let dentistID = e.target.value;
+        setShift([]);
         dispatch(dentistActions.getDentistSchedule(dentistID));
     }
 
@@ -125,19 +120,18 @@ function Appointment() {
                         </form>
                     </div>
                     <div className="container">
-                        <Calendar handleShowPlans={setShowPlans} workingDay={schedule} />
+                        <Calendar handleShilfDisplay={handleShilfDisplay} workingDay={schedule} />
                         <div className="schedule">
                             {
-                                showPlans &&
-                                [].map((smallPlan, i) => (
-                                    <div
-                                        onClick={confirmInfor}
-                                        key={i}
-                                        id={smallPlan.from}
-                                        className="small-plan">
-                                        {smallPlan.from}-{smallPlan.to}
-                                    </div>
-                                ))
+                                shift.map((s, i) => {
+                                    let id = `${s.from}-${s.to}`;
+                                    return (
+                                        <div className="shift">
+                                            <input type="radio" name="shift" id={id} />
+                                            <label htmlFor={id}>{`From ${s.from} to ${s.to}`}</label>
+                                        </div>
+                                    )
+                                })
                             }
                         </div>
                     </div>

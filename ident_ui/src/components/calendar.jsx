@@ -71,9 +71,7 @@ function Calendar(props) {
         date.setMonth(date.getMonth() - 1);
         setMonth(months[date.getMonth()]);
     }
-    function getSchedule() {
-        props.handleShowPlans(true);
-    }
+
     return (
         <div className="calendar">
             <div className="month noselect">
@@ -112,7 +110,7 @@ function Calendar(props) {
                         let dayinfor = `${date.getFullYear()}-${date.getMonth() + 1}-${day}`;
                         if (workingDay.indexOf(dayinfor) !== -1) {
                             return <div key={i} className="col1-7"><div className="square"><div className="day-display normal-day noselect day-have-plan"
-                                onClick={getSchedule}>{day}</div></div></div>
+                                onClick={() => props.handleShilfDisplay(dayinfor)}>{day}</div></div></div>
                         }
                         if (day === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
                             return <div key={i} className="col1-7"><div className="square"><div className="day-display today normal-day noselect"
