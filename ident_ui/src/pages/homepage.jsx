@@ -1,4 +1,6 @@
+import { Component } from 'react';
 import React from 'react';
+
 import Nav from '../components/nav';
 import Footer from '../components/footer';
 import Banner from '../components/banner';
@@ -7,13 +9,21 @@ import ServiceList from '../components/listService';
 import DentistList from '../components/listDentist';
 import ClinicInfo from '../components/clinicInfo';
 import IdentInNumber from '../components/identInNumber';
-import Appointment from '../components/appointment';
-function HomePage(){
-  return (
-    <React.Fragment>
-      <Appointment/>
-    </React.Fragment>
-  )
+class HomePage extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <Nav />
+        <Banner />
+        <ServiceList />
+        <ClinicInfo />
+        <DentistList />
+        <IdentInNumber />
+        <Popup />
+        <Footer />
+      </React.Fragment>
+    )
+  }
 }
 
 export default HomePage

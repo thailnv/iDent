@@ -1,5 +1,5 @@
 .nav {
-  position: fixed;
+  position: relative;
   left: 0;
   top: 0;
   display: flex;
@@ -27,7 +27,7 @@
   position: relative;
 }
 .nav .dropdown .dropdown-btn {
-  color: whitesmoke;
+  color: #333;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
@@ -35,7 +35,7 @@
   display: block;
 }
 .nav .dropdown .dropdown-btn:hover {
-  color: #e0e0e0;
+  color: #464646;
 }
 .dropdown-list {
   width: auto;
@@ -78,7 +78,7 @@ button.dropdown-item {
   height: 3em;
   width: 10em;
   margin-right: 2em;
-  color: whitesmoke;
+  color: #333;
   font-weight: 600;
   font-size: 14px;
 }
@@ -90,6 +90,7 @@ button.dropdown-item {
   }
   .dropdown-container {
     width: 0%;
+    display: none;
   }
   .nav .dropdown {
     margin-left: 2em;

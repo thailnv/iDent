@@ -22,9 +22,9 @@ function Nav() {
   const buttonTitle = user ? 'Logout' : 'Login';
 
   return (
-    <div className="nav">
+    <div className="nav" style={{ background: 'url("/img/banner-bg.jpg")' }}>
       <div className="logo">
-        <Link to="/trang-chu"><img src="/img/logo_trans_light.png" alt="" /></Link>
+        <Link to="/"><img src="/img/logo_trans.png" alt="" /></Link>
       </div>
       <div className="dropdown-container">
         <div className="dropdown">

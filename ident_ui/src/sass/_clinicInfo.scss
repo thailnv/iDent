@@ -87,6 +87,8 @@
       height: 12em;
       background-color: rgba(226, 226, 226, 0.2);
       overflow: hidden;
+      flex-direction: column;
+      justify-content: center;
       .img-container {
         width: 20%;
         margin: auto;

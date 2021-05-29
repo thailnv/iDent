@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Footer(){
+function Footer() {
   return (
-    <div className="footer" 
+    <div className="footer"
       style={{
         background: "url('/img/footer-bg.jpg')"
       }}
     >
       <div className="footer__contact">
         <div className="brand">
-          <img src="/img/foot-logo.png" alt=""/>
+          <img src="/img/foot-logo.png" alt="" />
         </div>
         <div className="content">
           Lorem ipsum dolor sit amet, consect
@@ -19,7 +19,7 @@ function Footer(){
           magna aliqua. Ut enim ad minim
         </div>
         <h4 className="icon">
-          <i className="fas fa-phone-alt"/>0357857086
+          <i className="fas fa-phone-alt" />0357857086
         </h4>
         <h4 className="icon">
           <i className="far fa-envelope"></i>info@ident.com
@@ -29,9 +29,9 @@ function Footer(){
         <h4 className="link-title">
           iDent infomation
         </h4>
-        <div className="line" style={{width: "3em"}}></div>
+        <div className="line" style={{ width: "3em" }}></div>
         <Link to="/co-so-vat-chat" className="link">
-          <i className="fas fa-angle-double-right"></i> Facilities
+          <i className="fas fa-angle-double-right"></i>Facilities
         </Link>
         <Link to="/nha-si" className="link">
           <i className="fas fa-angle-double-right"></i>Our doctors
@@ -44,7 +44,7 @@ function Footer(){
         <h4 className="link-title">
           Services
         </h4>
-        <div className="line" style={{width: "3em"}}></div>
+        <div className="line" style={{ width: "3em" }}></div>
         <Link to="/dich-vu/kiem-tra" className="link">
           <i className="fas fa-angle-double-right"></i>Teeth whitening
         </Link>
@@ -62,12 +62,13 @@ function Footer(){
         <button className="footer-button">
           Rate us
         </button>
-        <div 
-        style={{
-          color: "white",
-          textAlign: "center", 
-          marginTop: "1em", 
-          marginBottom: "1em"}}>
+        <div
+          style={{
+            color: "white",
+            textAlign: "center",
+            marginTop: "1em",
+            marginBottom: "1em"
+          }}>
           Or visit us at</div>
         <button className="visit-btn">
           <i className="fab fa-facebook-f"></i>

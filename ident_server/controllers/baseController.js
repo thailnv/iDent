@@ -139,7 +139,7 @@ exports.getAll = (Model) => async (req, res, next) => {
     }
     res.status(200).json({
       status: "success",
-      data: docs,
+      docs,
     });
   } catch (error) {
     res.status(500).json({
