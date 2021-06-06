@@ -43,12 +43,13 @@ const sendEmail = async (emailOptions) => {
 };
 
 function createRemindEmail(mInfo) {
-  let { minute, day, month, year, hour, name, service, email } = mInfo;
+  let { minute, day, month, year, hour, customer_name, service_name, email } =
+    mInfo;
   console.log(mInfo);
-  let date = `${day}/${month}/${year} at ${hour}:${minute}`;
-  let msg = `Dear ${name},
+  let date = `${day}/${month}/${year} at ${hour} : ${minute}`;
+  let msg = `Dear ${customer_name},
 
-We look forward to welcoming you for your ${service} service on ${date}.
+We look forward to welcoming you for your ${service_name} service on ${date}.
 As always, please let us know if there is anything more we can do for you.
 You may call us at ${process.env.IDENT_PHONE} with any questions or special requests.
 
@@ -56,10 +57,10 @@ Warm regards,
 
 iDent`;
   return {
-    subject: "iDent - appoinment reminder.",
+    subject: "Appoinment reminder.",
     text: msg,
     to: email,
-    from: process.env.IDENT_EMAIL,
+    from: `iDent - Dentistry<${process.env.IDENT_EMAIL}>`,
   };
 }
 
@@ -74,6 +75,7 @@ const scheduleEmail = async (req, res, next) => {
     next();
   } catch (err) {
     console.log(err);
+    req.sendEmailErr = true;
     next();
   }
 };

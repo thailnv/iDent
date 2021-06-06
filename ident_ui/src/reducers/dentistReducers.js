@@ -5,7 +5,6 @@ let initialState = {
 };
 
 export function dentist(state = initialState, action) {
-  console.log("dentist reducer", action);
   switch (action.type) {
     case constants.GET_DENTISTS_FAILURE:
     case constants.GET_DENTIST_FAILURE:

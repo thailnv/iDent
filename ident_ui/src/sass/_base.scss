@@ -68,11 +68,17 @@ input[type="number"] {
   height: 100vh;
   display: none;
   position: fixed;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 .block {
   display: block;
+}
+
+.flex {
+  display: flex;
 }
 
 .close-btn {

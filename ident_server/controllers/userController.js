@@ -61,7 +61,9 @@ exports.login = async (req, res, next) => {
     let user = await User.findOne({ googleID: req.body.googleID });
     if (!user) {
       try {
-        user = await User.findOne({ email: req.body.email });
+        user = await User.findOne({ email: req.body.email }).select(
+          "-resetPass"
+        );
         if (!user) this.signup(req, res, next);
         else {
           user.googleID = req.body.googleID;
@@ -107,10 +109,13 @@ exports.login = async (req, res, next) => {
         return;
       }
 
-      const user = await User.findOne({ email }).select("+password");
+      const user = await User.findOne({ email }).select("+password -resetPass");
 
       if (!user || !(await user.comparePassword(password, user.password))) {
-        res.status(401).send("email or password is incorrect!");
+        res.status(401).json({
+          status: "fail",
+          message: "Email or password is incorrect!",
+        });
         return;
       }
 

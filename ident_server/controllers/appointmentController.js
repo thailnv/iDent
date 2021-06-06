@@ -2,7 +2,29 @@ const c = require("../constants");
 const base = require("./baseController");
 const { Appointment, validate } = require("../models/appointmentModel");
 
-exports.addOne = base.addOne(Appointment);
+exports.addOne = async (req, res, next) => {
+  if (req.sendEmailErr) {
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong please try again latter",
+    });
+    return;
+  }
+  try {
+    let appointment = await Appointment.create(req.body);
+    res.status(201).json({
+      status: "success",
+      appointment,
+    });
+    req.appointment = appointment;
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong please try again latter",
+    });
+  }
+};
 exports.getAll = base.getAll(Appointment);
 exports.getOne = base.getOne(Appointment);
 exports.updateOne = base.updateOne(Appointment);

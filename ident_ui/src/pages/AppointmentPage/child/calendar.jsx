@@ -9,12 +9,31 @@ function Calendar(props) {
     //appointmentform
     const months = [
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",
-    ]
+    ];
+    const monthNumber = {
+        January: 1,
+        February: 2,
+        March: 3,
+        April: 4,
+        May: 5,
+        June: 6,
+        July: 7,
+        August: 8,
+        September: 9,
+        October: 10,
+        November: 11,
+        December: 12
+    }
+
     const [month, setMonth] = useState(months[date.getMonth()]);
     const [days, setDays] = useState([]);
     const [prevDays, setPrevDays] = useState([]);
     const [nextDays, setNextDays] = useState([]);
+    const [selectedDay, setSelectedDay] = useState("");
 
+    function handleChangeDay(e) {
+        props.handleShiftDisplay(e);
+    }
 
     function getCalendarDays() {
         const firstDayIndex = new Date(
@@ -60,7 +79,9 @@ function Calendar(props) {
 
     useEffect(() => {
         getCalendarDays();
-    }, [month])
+        let { year, month, day } = props.selectedDay;
+        setSelectedDay(`${year}-${month}-${day}`);
+    }, [month, props])
 
 
     function goNextMonth() {
@@ -108,15 +129,47 @@ function Calendar(props) {
                 {
                     days.map(function (day, i) {
                         let dayinfor = `${date.getFullYear()}-${date.getMonth() + 1}-${day}`;
-                        if (workingDay.indexOf(dayinfor) !== -1) {
-                            return <div key={i} className="col1-7"><div className="square"><div className="day-display normal-day noselect day-have-plan"
-                                onClick={() => props.handleShilfDisplay(dayinfor)}>{day}</div></div></div>
+                        let currentDay = new Date().getDate();
+                        let currentMonth = new Date().getMonth() + 1;
+                        let customClass = selectedDay === dayinfor
+                            ? "day-display noselect day-have-plan day-active"
+                            : "day-display noselect day-have-plan"
+                        if (workingDay.indexOf(dayinfor) !== -1
+                            && currentDay <= day
+                            && currentMonth <= monthNumber[month]) {
+                            return (
+                                <div key={i} className="col1-7">
+                                    <div className="square">
+                                        <div id={dayinfor} className={customClass}
+                                            onClick={handleChangeDay}>
+                                            {day}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
                         }
                         if (day === new Date().getDate() && date.getMonth() === new Date().getMonth()) {
-                            return <div key={i} className="col1-7"><div className="square"><div className="day-display today normal-day noselect"
-                            >{day}</div></div></div>
-                        } else
-                            return <div key={i} className="col1-7"><div className="square"><div className="normal-day day-display noselect">{day}</div></div></div>
+                            return (
+                                <div key={i} className="col1-7">
+                                    <div className="square">
+                                        <div className="day-display today noselect">
+                                            {day}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
+                        else {
+                            return (
+                                <div key={i} className="col1-7">
+                                    <div className="square">
+                                        <div className="day-display noselect">
+                                            {day}
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
                     }
                     )
                 }

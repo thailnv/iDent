@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 
 import React from 'react';
 import { Login } from './Login';
+import ResultPopup from "./resultPopup";
 import ForgotPass from './forgetpassword';
 
 
@@ -14,12 +15,13 @@ function Popup() {
   let currentPopup = {
     login: <Login />,
     forgotpass: <ForgotPass />,
+    result: <ResultPopup />
   }
 
   let className = 'popup';
 
   if (popupType)
-    className += ' block';
+    className += ' flex';
 
   return (
     <div className={className}>

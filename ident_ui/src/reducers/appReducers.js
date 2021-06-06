@@ -1,9 +1,8 @@
 import { constants } from "../constants";
 
-const initialState = { popupType: "" };
+const initialState = { popupType: "", message: "" };
 
 export function application(state = initialState, action) {
-  console.log("appReducers", action);
   switch (action.type) {
     case constants.POPUP_LOGIN:
       return {
@@ -20,6 +19,18 @@ export function application(state = initialState, action) {
       return {
         ...state,
         popupType: "forgotpass",
+      };
+    case constants.MAKE_APPOINTMENT_SUCCESS:
+      return {
+        ...state,
+        message: "Your appointment was successfully create !",
+        popupType: "result",
+      };
+    case constants.MAKE_APPOINTMENT_FAILURE:
+      return {
+        ...state,
+        message: "Something went wrong please try again latter !",
+        popupType: "result",
       };
     default:
       return state;

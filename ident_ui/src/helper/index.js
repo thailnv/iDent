@@ -51,5 +51,15 @@ function toggleSubitem() {
   if (subitem.offsetHeight === 0) subitem.style.height = "9em";
   else subitem.style.height = "0";
 }
-
-export { windowScroll, showSidebar, closeSidebar, toggleSubitem };
+function showAppointmentStatus(status) {
+  if (status === "success")
+    alert("Thank you! Your appointment was successfully created!");
+  else alert("Something went wrong please try again latter");
+}
+export {
+  windowScroll,
+  showSidebar,
+  closeSidebar,
+  toggleSubitem,
+  showAppointmentStatus,
+};
