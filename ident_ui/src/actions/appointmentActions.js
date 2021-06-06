@@ -7,7 +7,6 @@ function makeAppointment(appointment) {
       else dispatch(failure(res.message));
     });
   };
-
   function success() {
     return { type: c.MAKE_APPOINTMENT_SUCCESS };
   }
