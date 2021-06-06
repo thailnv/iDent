@@ -4,12 +4,13 @@ import { authentication } from "./authReducers";
 import { application } from "./appReducers";
 import { dentist } from "./dentistReducers";
 import { service } from "./serviceReducers";
-
+import { appointment } from "./appointmentReducers";
 const rootReducer = combineReducers({
   authentication,
   application,
   dentist,
   service,
+  appointment
 });
 
 export default rootReducer;
