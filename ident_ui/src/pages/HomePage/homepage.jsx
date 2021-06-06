@@ -10,19 +10,19 @@ import DentistList from './child/listDentist';
 import ClinicInfo from './child/clinicInfo';
 import MenuSidebar from '../../common/menuSidebar';
 import IdentInNumber from './child/identInNumber';
-import AppointmentList from '../../components/appointmentlist';
-import UserControll from '../../common/userProfile';
-
 class HomePage extends Component {
   render() {
     return (
       <React.Fragment>
         <Nav />
-        <div  className="main_container">
-          <UserControll/>
-          <AppointmentList/>
-        </div>
+        <Banner />
+        <ServiceList />
+        <ClinicInfo />
+        <DentistList />
+        <IdentInNumber />
         <Popup />
+        <Footer />
+        <MenuSidebar />
       </React.Fragment>
     )
   }
