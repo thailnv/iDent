@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
 
-import { dentistActions } from "../actions/dentistAction";
-import { serviceActions } from "../actions/serviceActions";
-import Input from '../common/input';
+import { dentistActions } from "../../../actions/dentistAction";
+import { serviceActions } from "../../../actions/serviceActions";
+import Input from '../../../common/input';
+import LoadingDisplay from "../../../common/loadingDisplay";
 import Calendar from './calendar';
-import { constants } from '../constants';
+import { constants } from '../../../constants';
 
 function Appointment() {
     const [input, setInput] = useState({ email: '' })
@@ -17,6 +18,7 @@ function Appointment() {
 
     const [currentDentists, setCurrentDentists] = useState([]);
     const [currentServices, setCurrentServices] = useState([]);
+    const [selectedShift, setSelectedShift] = useState("");
     const dentists = useSelector(state => state.dentist.dentists);
     const services = useSelector(state => state.service.services);
     const dentistStatus = useSelector(state => state.dentist.status);
@@ -36,24 +38,25 @@ function Appointment() {
                 setCurrentDentists(dentists);
                 setCurrentServices(services);
             }
-    }, [dentists, dentistStatus, serviceStatus, services, dispatch])
+    }, [dentists, dentistStatus, serviceStatus, services, dispatch]);
+
     function handleInputChange(e) {
         const { name, value } = e.target;
         setInput(input => ({ ...input, [name]: value }));
     }
+
     function handleShilfDisplay(date) {
-        console.log(date);
         let selectedSchedule = schedule.filter(v => date === `${v.year}-${v.month}-${v.day}`);
-        console.log(selectedSchedule[0].shifts);
         setShift(selectedSchedule[0].shifts);
-        console.log(shift);
     }
+
     function validate() {
         let err = {};
         if (!email)
             err.email = "Please enter email!";
         return err;
     }
+
     function handleSubmit(e) {
         e.preventDefault();
         let error = validate();
@@ -73,17 +76,24 @@ function Appointment() {
                     isOk = true;
             return isOk;
         });
+        dispatch({ type: "REMOVE_SCHEDULE" });
         setCurrentDentists(lstDentists);
+        document.getElementById("doctor").value = "Pick a dentist";
     }
+
     function handleDentistChange(e) {
         let dentistID = e.target.value;
         setShift([]);
         dispatch(dentistActions.getDentistSchedule(dentistID));
     }
 
+    function handleSelectShift(e) {
+        let shift = e.target.id;
+        setSelectedShift(shift);
+    }
     return (
         dentistStatus === constants.LOADING || serviceStatus === constants.LOADING
-            ? <div></div>
+            ? <LoadingDisplay />
             :
             <div className="page_container" style={{ background: "url(/img/a_banner.jpg)" }}>
                 <div className="appointment">
@@ -95,12 +105,14 @@ function Appointment() {
                         <form className="book-doctor" onSubmit={handleSubmit}>
                             <label htmlFor="service">Service</label>
                             <select id="service" onChange={handleServiceChange}>
+                                <option className="service-name" >Pick a service</option>
                                 {
                                     currentServices.map((v, i) => <option key={i} className="service-name" value={v._id}>{v.name}</option>)
                                 }
                             </select>
                             <label htmlFor="doctor">Dentists</label>
                             <select id="doctor" onChange={handleDentistChange}>
+                                <option className="doctor-name" >Pick a dentist</option>
                                 {
                                     currentDentists.map(function (dentist, i) {
                                         return <option className="doctor-name" key={i} value={dentist._id}>{dentist.name}</option>
@@ -116,23 +128,25 @@ function Appointment() {
                                 error={errors.email}
                                 handleChange={handleInputChange}
                             />
-                            <button onClick={handleSubmit} id="getDoctor-btn">Book now</button>
                         </form>
                     </div>
                     <div className="container">
                         <Calendar handleShilfDisplay={handleShilfDisplay} workingDay={schedule} />
                         <div className="schedule">
-                            {
-                                shift.map((s, i) => {
-                                    let id = `${s.from}-${s.to}`;
-                                    return (
-                                        <div className="shift">
-                                            <input type="radio" name="shift" id={id} />
-                                            <label htmlFor={id}>{`From ${s.from} to ${s.to}`}</label>
-                                        </div>
-                                    )
-                                })
-                            }
+                            <div className="shift-display">
+                                {
+                                    shift.map((s, i) => {
+                                        let id = `${s.from}-${s.to}`;
+                                        let customClass = id === selectedShift ? "shift shift-active" : "shift"
+                                        return (
+                                            <div id={id} onClick={handleSelectShift} className={customClass} key={i}>
+                                                {`${s.from} - ${s.to}`}
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <button onClick={handleSubmit} id="getDoctor-btn">Book now</button>
                         </div>
                     </div>
                 </div>

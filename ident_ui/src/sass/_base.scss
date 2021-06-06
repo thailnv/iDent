@@ -113,3 +113,14 @@ input[type="number"] {
   font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
   color: $lightblue;
 }
+
+.mobile-display {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .mobile-display {
+    display: block !important;
+    margin-left: 0 !important;
+  }
+}

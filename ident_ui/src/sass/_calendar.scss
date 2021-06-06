@@ -55,27 +55,6 @@
   flex-direction: column;
   align-items: center;
 }
-
-#getDoctor-btn {
-  width: 100%;
-  height: 3em;
-  margin-top: 30px;
-  border: 1.5px solid white;
-  background: transparent;
-  color: white;
-  font-weight: bold;
-  border-radius: 0.25em;
-  cursor: pointer;
-}
-#getDoctor-btn:focus {
-  outline: none;
-}
-#getDoctor-btn:hover {
-  border: none;
-  border: 1.5px solid white;
-  background: rgba(168, 168, 168, 0.5);
-  color: white;
-}
 .content {
   width: 90%;
 }
@@ -116,6 +95,9 @@
   height: 2em;
   max-width: 100%;
   border: none;
+}
+.book-doctor select:hover option:first-of-type {
+  display: none;
 }
 .container {
   background-color: white;
@@ -221,26 +203,65 @@
   color: white;
 }
 .days .day-display:hover {
-  background: #57aee0;
+  background: $hover-color;
   color: white;
   transition: all 0.3s;
 }
 .schedule {
   width: 50%;
   height: 100%;
-  display: flex;
   position: relative;
-  flex-wrap: wrap;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 1em;
-  .shift {
-    display: block;
-    font-size: 18px;
-    margin-top: 1em;
-    label {
-      margin-left: 0.5em;
+  justify-content: space-between;
+  .shift-display {
+    padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .shift {
+      text-align: center;
+      display: block;
+      font-size: 18px;
+      margin-top: 1em;
+      min-width: 45%;
+      padding-left: 1em;
+      padding-right: 1em;
+      height: 2.5em;
+      line-height: 2.5em;
+      box-shadow: 0 0 2px 0 rgb(121, 121, 121);
+      color: rgb(99, 99, 99);
+      label {
+        margin-left: 0.5em;
+      }
     }
+    .shift:hover {
+      color: white;
+      background: $hover-color;
+    }
+    .shift-active {
+      color: white;
+      background: $hover-color;
+    }
+  }
+  #getDoctor-btn {
+    width: 100%;
+    height: 3em;
+    background: $hover-color;
+    opacity: 0.8;
+    color: white;
+    font-weight: bold;
+    border-radius: 0;
+    cursor: pointer;
+  }
+  #getDoctor-btn:focus {
+    outline: none;
+  }
+  #getDoctor-btn:hover {
+    border: none;
+    border: 1.5px solid white;
+    background: rgba(168, 168, 168, 0.5);
+    color: white;
   }
 }
 .schedule img {
@@ -282,7 +303,7 @@
   display: block;
 }
 .small-plan:hover {
-  background: #68c4fa;
+  background: $hover-color;
   color: white;
   transition: all 0.3s;
 }
@@ -337,6 +358,8 @@
   .schedule {
     width: 100%;
     height: fit-content;
-    padding: 1em;
+    .shift-display {
+      padding: 1em;
+    }
   }
 }

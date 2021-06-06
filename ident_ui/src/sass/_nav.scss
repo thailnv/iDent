@@ -4,9 +4,17 @@
   top: 0;
   display: flex;
   align-items: center;
-  max-height: 4em;
+  height: 4em;
   width: 100%;
   z-index: 3;
+  .mobile-display {
+    display: none;
+    margin-right: 1em;
+    img {
+      width: 20px;
+      object-fit: contain;
+    }
+  }
 }
 .logo {
   padding-left: 2em;
@@ -88,11 +96,8 @@ button.dropdown-item {
     padding-left: 0em;
     width: 100%;
   }
-  .dropdown-container {
-    width: 0%;
-    display: none;
-  }
   .nav .dropdown {
+    display: none;
     margin-left: 2em;
   }
   #account-btn {

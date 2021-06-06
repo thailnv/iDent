@@ -23,6 +23,11 @@ export function dentist(state = initialState, action) {
         ...state,
         schedule: action.schedule,
       };
+    case "REMOVE_SCHEDULE":
+      return {
+        ...state,
+        schedule: [],
+      };
     default:
       return state;
   }

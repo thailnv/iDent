@@ -7,6 +7,7 @@ const { scheduleEmail } = require("../middleware/mailService");
 const controller = require("../controllers/appointmentController");
 
 router.post("/", validator(validate), scheduleEmail, controller.addOne);
+router.get("/by_user/:id", controller.getByUserId);
 router.use(auth.protect);
 router.get("/by_email", controller.getOneByEmail);
 router.get("/:id", controller.getOne);
