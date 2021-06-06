@@ -29,5 +29,27 @@ function windowScroll() {
     }
   };
 }
+function showSidebar() {
+  document.getElementById("menuSidebar").style.width = "300px";
+  document
+    .getElementById("menuSidebar")
+    .addEventListener("transitionend", () => {
+      document.body.style.overflow = "hidden";
+    });
+}
+function closeSidebar() {
+  const sidebar = document.getElementById("menuSidebar");
+  sidebar.style.width = "0";
+  sidebar.addEventListener("transitionend", () => {
+    if (!sidebar.offsetWidth) {
+      document.body.style.overflow = "auto";
+    }
+  });
+}
+function toggleSubitem() {
+  const subitem = document.getElementById("sidebarSubitem");
+  if (subitem.offsetHeight === 0) subitem.style.height = "9em";
+  else subitem.style.height = "0";
+}
 
-export { windowScroll };
+export { windowScroll, showSidebar, closeSidebar, toggleSubitem };

@@ -3,8 +3,9 @@ const joi = require("joi");
 
 const appointmentSchema = mongoose.Schema(
   {
-    name: String,
-    service: String,
+    customer: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+    service: { type: mongoose.Schema.Types.ObjectId, ref: "service" },
+    dentist: { type: mongoose.Schema.Types.ObjectId, ref: "dentist" },
     hour: Number,
     minute: Number,
     year: Number,
@@ -19,8 +20,9 @@ const appointmentSchema = mongoose.Schema(
 
 function validate(appointment) {
   const schema = joi.object({
-    name: joi.string().min(5).required(),
+    customer: joi.string().min(5).required(),
     service: joi.string().min(5).required(),
+    dentist: joi.string().min(5).required(),
     hour: joi.number().min(0).max(24).required(),
     minute: joi.number().min(0).max(60).required(),
     year: joi.number().min(0).required(),

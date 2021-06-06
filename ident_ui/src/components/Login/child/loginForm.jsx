@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { userActions } from '../actions/userActions';
-import GoogleLogin from './googleLogin';
-import { appActions } from '../actions/appActions';
-import Input from './input';
-import { constants } from '../constants';
+import { userActions } from '../../../actions/userActions';
+// import GoogleLogin from './googleLogin';
+import { appActions } from '../../../actions/appActions';
+import Input from '../../../common/input';
+import { constants } from '../../../constants';
 
 function LoginForm(props) {
   const [inputs, setInputs] = useState({
@@ -79,7 +79,7 @@ function LoginForm(props) {
         {message && <div className="center-text text-error">Email or password incorrect!</div>}
         <div>Don't have an account? <button onClick={props.onToggle}>Register</button> </div>
         <div> <button onClick={forgotPass} style={{ color: "#006eff", }}>Forgot password?</button> </div>
-        <GoogleLogin />
+        {/* <GoogleLogin /> */}
       </div>
     </form>
   )

@@ -1,6 +1,13 @@
 const mongoose = require("mongoose");
 const joi = require("joi");
 
+const subSchema = mongoose.Schema({
+  shift: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "shift",
+  },
+});
+
 const scheduleSchema = mongoose.Schema({
   dentist: { type: mongoose.Schema.Types.ObjectId, ref: "dentist" },
   shifts: [{ type: mongoose.Schema.Types.ObjectId, ref: "shift" }],

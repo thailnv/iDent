@@ -91,7 +91,17 @@
   height: 0.25em;
   background: #3c3f42;
 }
-
+.loading-display {
+  height: calc(100vh - 4em);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  img {
+    width: 120px;
+    margin: auto;
+  }
+}
 @media only screen and (max-width: 600px) {
   .footer {
     padding-left: 2%;

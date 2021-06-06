@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 
-import DentistCard from '../common/dentistCard';
+import DentistCard from '../../../common/dentistCard';
 
 class ListDentist extends Component {
   render() {

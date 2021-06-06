@@ -30,3 +30,30 @@ exports.getOneByEmail = async (req, res, next) => {
     next(error);
   }
 };
+exports.getByUserId = async (req, res, next) => {
+  try {
+    let appointments = await Appointment.find({
+      customer: req.params.id,
+    })
+      .select("-customer")
+      .populate("dentist", "name")
+      .populate("service", "name");
+    if (appointments.length) {
+      res.status(200).json({
+        status: "success",
+        appointments,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "No appointment found with that customer",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong please try again latter",
+    });
+  }
+};
