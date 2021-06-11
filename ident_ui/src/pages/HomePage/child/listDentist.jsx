@@ -18,7 +18,7 @@ class ListDentist extends Component {
         <div className="slider-container">
           <div className="card-container">
             <DentistCard
-              img="/img/dentist_1.jpg"
+              img="https://i.ibb.co/jLbg0wr/dentist-1.jpg"
               name="Archie White"
               title="Dentist"
               info="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum."
@@ -26,7 +26,7 @@ class ListDentist extends Component {
           </div>
           <div className="card-container">
             <DentistCard
-              img="/img/dentist_2.jpg"
+              img="https://i.ibb.co/wpsByQj/dentist-2.jpg"
               name="Dylan Taylor"
               title="Orthodontist"
               info="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum."
@@ -34,7 +34,7 @@ class ListDentist extends Component {
           </div>
           <div className="card-container">
             <DentistCard
-              img="/img/dentist_3.jpg"
+              img="https://i.ibb.co/X5XfryJ/dentist-3.jpg"
               name="Amy Clarke"
               title="Hygienist"
               info="At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum."

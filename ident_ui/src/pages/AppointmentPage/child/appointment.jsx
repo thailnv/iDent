@@ -27,6 +27,8 @@ function Appointment() {
     const [selectedDay, setSelectedDay] = useState({ year: -1, month: -1, day: -1 });
     const [dentistID, setDentistID] = useState("");
     const [time, setTime] = useState({});
+    const [timeConsume, setTimeConsume] = useState(0);
+    const [selectedShiftID, setSelectedShiftID] = useState("");
 
     const dispatch = useDispatch();
 
@@ -95,12 +97,16 @@ function Appointment() {
             minute: time.minute,
             customer: user._id,
             customer_name: user.name,
-            email: user.email
+            email: user.email,
+            time: timeConsume,
+            shift: selectedShiftID
         }))
     }
 
     function handleServiceChange(e) {
         let serviceID = e.target.value;
+        let time = services.filter(v => v._id === serviceID)[0].time;
+        setTimeConsume(time);
         let serviceName = e.target.options[e.target.selectedIndex].text;
         let selectedService = {
             serviceID,
@@ -132,10 +138,10 @@ function Appointment() {
 
     function handleSelectShift(e) {
         let shift = e.target.id;
+        setSelectedShiftID(e.target.getAttribute("shift_id"));
         let hour = parseInt(shift.split('-')[0].split(':')[0]);
         let minute = parseInt(shift.split('-')[0].split(':')[1]);
         setTime({ hour, minute })
-        console.log(hour, minute);
         setSelectedShift(shift);
     }
 
@@ -143,7 +149,7 @@ function Appointment() {
         dentistStatus === constants.LOADING || serviceStatus === constants.LOADING
             ? <LoadingDisplay />
             :
-            <div className="page_container" style={{ background: "url(/img/a_banner.jpg)" }}>
+            <div className="page_container" style={{ background: "url(https://i.ibb.co/3zSLHKj/a-banner.jpg)" }}>
                 <div className="appointment">
                     <div className="service">
                         <div className="content">
@@ -155,7 +161,7 @@ function Appointment() {
                             <select id="service" onChange={handleServiceChange}>
                                 <option className="service-name" >Pick a service</option>
                                 {
-                                    currentServices.map((v, i) => <option key={i} className="service-name" value={v._id}>{v.name}</option>)
+                                    currentServices.map((v, i) => <option key={i} time={v.time} className="service-name" value={v._id}>{v.name}</option>)
                                 }
                             </select>
                             <label htmlFor="doctor">Dentists</label>
@@ -178,7 +184,7 @@ function Appointment() {
                                         let id = `${s.from}-${s.to}`;
                                         let customClass = id === selectedShift ? "shift shift-active" : "shift"
                                         return (
-                                            <div id={id} onClick={handleSelectShift} className={customClass} key={i}>
+                                            <div id={id} onClick={handleSelectShift} shift_id={s._id} className={customClass} key={i}>
                                                 {`${s.from} - ${s.to}`}
                                             </div>
                                         )

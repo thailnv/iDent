@@ -1,24 +1,21 @@
-import {constants} from "../constants"
+import { constants as c } from "../constants";
 
-const initialState = {
-  status: constants.LOADING,
+const initialState = { status: c.LOADING, appointmentStatus: c.LOADING };
 
-}
-
-export function appointment (state = initialState , action)
-{
-    console.log('appointmentReducers',action);
-    switch(action.type){
-        case constants.GET_APPOINTMENT_SUCCESS:
-            return{
-                status:constants.SUCCESS,
-                appointments: action.appointments,
-            }
-            case constants.GET_APPOINTMENT_FAILURE:
-                return {
-                  message: action.message,
-                };
-            default:
-                return state;
-    }
+export function appointment(state = initialState, action) {
+  console.log("appointmentReducers", action);
+  switch (action.type) {
+    case c.GET_APPOINTMENTS_SUCCESS:
+      return {
+        status: c.SUCCESS,
+        appointments: action.appointments,
+      };
+    case c.GET_APPOINTMENTS_FAILURE:
+      return {
+        status: c.FAILURE,
+        message: action.message,
+      };
+    default:
+      return state;
+  }
 }

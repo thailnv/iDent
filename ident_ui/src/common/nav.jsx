@@ -27,28 +27,28 @@ function Nav() {
   const buttonTitle = user ? 'Logout' : 'Login';
 
   return (
-    <div className="nav" style={{ background: 'url("/img/banner-bg.jpg")' }}>
+    <div className="nav" style={{ background: 'url("https://i.ibb.co/BKq8KSg/banner-bg.jpg")' }}>
       <div className="logo">
-        <a href="/"><img src="/img/logo_trans.png" alt="" /></a>
+        <a href="/"><img src="https://i.ibb.co/DrQY4fY/logo-trans.png" alt="" /></a>
       </div>
       <div className="dropdown-container">
         <div className="dropdown">
-          <a href="/dich-vu" className="dropdown-btn">Service +</a>
+          <a href="/services" className="dropdown-btn">Service +</a>
           <div className="dropdown-list">
-            <a href="/dich-vu/kiem-tra" className="dropdown-item">Teeth whitening</a>
-            <a href="/dich-vu/nho-rang" className="dropdown-item">Teeth cleaning </a>
-            <a href="/dich-vu/chinh-nha" className="dropdown-item">Dental anesthesia</a>
-            <a href="/dich-vu/tay-trang" className="dropdown-item">Orthodontics </a>
+            <a href="/services/teeth-whitening" className="dropdown-item">Teeth whitening</a>
+            <a href="/services/teeth-cleaning" className="dropdown-item">Teeth cleaning </a>
+            <a href="/services/dental-anesthesia" className="dropdown-item">Dental anesthesia</a>
+            <a href="/services/orthodontics" className="dropdown-item">Orthodontics </a>
           </div>
         </div>
         <div className="dropdown">
           <a href="/make-appointment" className="dropdown-btn">Appointment</a>
         </div>
         <div className="dropdown">
-          <a href="/nha-si" className="dropdown-btn">Our Doctors</a>
+          <a href="/dentists" className="dropdown-btn">Our Doctors</a>
         </div>
         <div className="dropdown">
-          <a href="/co-so-vat-chat" className="dropdown-btn">Facilities</a>
+          <a href="/appointment-list" className="dropdown-btn">Facilities</a>
         </div>
         <div className="dropdown">
           <button

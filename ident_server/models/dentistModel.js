@@ -6,6 +6,8 @@ const dentistSchema = mongoose.Schema({
   degree: { type: mongoose.Schema.Types.ObjectId, ref: "degree" },
   idNumber: String,
   phone: String,
+  img: String,
+  description: String,
   expert: [{ type: mongoose.Schema.Types.ObjectId, ref: "service" }],
 });
 
@@ -15,6 +17,8 @@ const validate = (dentist) => {
     degree: joi.string().required(),
     idNumber: joi.string().min(9).required(),
     phone: joi.string().required(),
+    img: joi.string(),
+    description: joi.string(),
     expert: joi.array().items(joi.string()).required(),
   });
   return schema.validate(dentist);

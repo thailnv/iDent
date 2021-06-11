@@ -1,6 +1,7 @@
 const c = require("../constants");
 const base = require("./baseController");
 const { Appointment, validate } = require("../models/appointmentModel");
+const { Schedule } = require("../models/scheduleModel");
 
 exports.addOne = async (req, res, next) => {
   if (req.sendEmailErr) {
@@ -11,7 +12,19 @@ exports.addOne = async (req, res, next) => {
     return;
   }
   try {
+    console.log(req.body);
     let appointment = await Appointment.create(req.body);
+    let schedule = await Schedule.findOne({
+      dentist: req.body.dentist,
+      day: req.body.day,
+      month: req.body.month,
+      year: req.body.year,
+    });
+    let shiftIndex = schedule.shifts.indexOf(req.body.shift);
+    schedule.time[shiftIndex] -= req.body.time;
+    console.log(schedule.time[shiftIndex]);
+    schedule.markModified("time");
+    await schedule.save();
     res.status(201).json({
       status: "success",
       appointment,
@@ -58,7 +71,13 @@ exports.getByUserId = async (req, res, next) => {
       customer: req.params.id,
     })
       .select("-customer")
-      .populate("dentist", "name")
+      .populate({
+        path: "dentist",
+        select: "name img",
+        populate: {
+          path: "degree",
+        },
+      })
       .populate("service", "name");
     if (appointments.length) {
       res.status(200).json({

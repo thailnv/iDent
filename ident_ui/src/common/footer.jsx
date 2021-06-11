@@ -5,12 +5,12 @@ function Footer() {
   return (
     <div className="footer"
       style={{
-        background: "url('/img/footer-bg.jpg')"
+        background: "url('https://i.ibb.co/mym8PW6/footer-bg.jpg')"
       }}
     >
       <div className="footer__contact">
         <div className="brand">
-          <img src="/img/foot-logo.png" alt="" />
+          <img src="https://i.ibb.co/KVZjb5F/foot-logo.png" alt="" />
         </div>
         <div className="content">
           Lorem ipsum dolor sit amet, consect

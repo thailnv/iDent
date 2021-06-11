@@ -7,7 +7,6 @@ function Input(props) {
     name,
     error,
     placeholder,
-    defaultValue,
     handleChange
   } = props;
 
@@ -18,7 +17,7 @@ function Input(props) {
       className={className}
       type={type}
       name={name}
-      value={value ? value : defaultValue}
+      value={value}
       placeholder={placeholder}
       onChange={handleChange}
     />)

@@ -11,6 +11,7 @@ const subSchema = mongoose.Schema({
 const scheduleSchema = mongoose.Schema({
   dentist: { type: mongoose.Schema.Types.ObjectId, ref: "dentist" },
   shifts: [{ type: mongoose.Schema.Types.ObjectId, ref: "shift" }],
+  time: [Number],
   day: Number,
   month: Number,
   year: Number,
@@ -20,6 +21,7 @@ function validate(schedule) {
   let schema = joi.object({
     dentist: joi.string().min(5).required(),
     shifts: joi.array().items(joi.string()).required(),
+    time: joi.array(),
     day: joi.number().min(1).max(31).required(),
     month: joi.number().min(1).max(12).required(),
     year: joi.number().min(0).required(),
