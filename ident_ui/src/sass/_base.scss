@@ -13,6 +13,11 @@ body {
   position: relative;
 }
 
+.disable {
+  user-select: none;
+  pointer-events: none !important;
+}
+
 button {
   cursor: pointer;
   border-radius: 0.25em;

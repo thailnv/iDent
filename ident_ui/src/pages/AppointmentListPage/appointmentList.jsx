@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Nav from "../../common/nav";
@@ -16,12 +16,26 @@ function AppointmentListPage() {
   const dispatch = useDispatch();
   const status = useSelector(state => state.appointment.status);
   const appointments = useSelector(state => state.appointment.appointments);
+  const [confirmPopupStyle, setConfirmPopupStyle] = useState("none");
+  const [cancelAppointmentID, setCancelAppointmentID] = useState("");
+
+  function showConfirm(id) {
+    setCancelAppointmentID(id);
+    setConfirmPopupStyle("flex");
+  }
+
+  function handleConfirmCancel() {
+    dispatch(appointmentActions.cancelAppointment(cancelAppointmentID));
+    setConfirmPopupStyle("none");
+  }
+
+  function handleNotConfirmCancel() {
+    setConfirmPopupStyle("none");
+  }
 
   useEffect(() => {
     if (status === c.LOADING)
-      dispatch(appointmentActions.getUserAppointments("6067c63e9d56c60614ac3c32"));
-    else
-      console.log(appointments)
+      dispatch(appointmentActions.getUserAppointments());
   })
 
   return (
@@ -57,6 +71,9 @@ function AppointmentListPage() {
                         let month = v.month < 10 ? `0${v.month}` : `${v.month}`;
                         return (
                           <AppointmentCard key={i}
+                            handleCancel={showConfirm}
+                            id={v._id}
+                            status={v.status}
                             time={`${hour}:${minute}`}
                             date={`${day}/${month}/${v.year}`}
                             dentist_name={v.dentist.name}
@@ -74,6 +91,13 @@ function AppointmentListPage() {
             </div>
           </div>
       }
+      <div className="popup-container" style={{ display: confirmPopupStyle }}>
+        <div className="confirm-popup">
+          Are you sure to cancel this appointment ? <br />
+          <button onClick={handleConfirmCancel} className="yes-btn">Yes</button>
+          <button onClick={handleNotConfirmCancel} className="no-btn">No</button>
+        </div>
+      </div>
       <Footer />
       <Popup />
       <MenuSidebar />

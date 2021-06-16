@@ -3,7 +3,6 @@ import { constants as c } from "../constants";
 const initialState = { status: c.LOADING, appointmentStatus: c.LOADING };
 
 export function appointment(state = initialState, action) {
-  console.log("appointmentReducers", action);
   switch (action.type) {
     case c.GET_APPOINTMENTS_SUCCESS:
       return {

@@ -8,6 +8,9 @@ const dentistSchema = mongoose.Schema({
   phone: String,
   img: String,
   description: String,
+  rating: Number,
+  yearExperience: Number,
+  patient: Number,
   expert: [{ type: mongoose.Schema.Types.ObjectId, ref: "service" }],
 });
 

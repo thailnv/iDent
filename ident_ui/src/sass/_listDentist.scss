@@ -87,6 +87,113 @@
   }
 }
 
+.dentists-page {
+  width: 100%;
+  background: url("https://i.ibb.co/Gn3MBTt/banner-1.jpg") center;
+  background-size: cover;
+  background: white;
+  .dentist-card-container {
+    > h2 {
+      margin-top: 0.75em;
+      margin-bottom: 0.5em;
+    }
+    width: 90%;
+    margin: auto;
+    .dentist-card {
+      height: 185px;
+      width: 90%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      box-shadow: 0 0 4px 0 rgb(133, 133, 133);
+      margin-bottom: 15px;
+      .main-view {
+        width: calc(100% - 250px);
+        border-right: 1px solid rgba(230, 226, 226, 0.438);
+        position: relative;
+        .name {
+          font-size: 14px;
+        }
+        .intro {
+          width: 90%;
+          margin-top: 0.5em;
+          color: rgb(95, 94, 94);
+          overflow: hidden;
+          font-size: 15px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .title {
+          width: 90%;
+          font-size: 14px;
+          font-weight: 500;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          color: $hover-color;
+        }
+        .expert {
+          margin-top: 1em;
+        }
+      }
+      .sub-view {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0 10px;
+        width: 250px;
+        .point i {
+          width: 20px;
+          height: 20px;
+          color: $hover-color;
+          margin-right: 10px;
+        }
+        .point {
+          font-size: 12px;
+        }
+        .student,
+        .point span {
+          font-size: 15px;
+          font-weight: bold;
+          color: #555;
+        }
+      }
+    }
+    .dentist-card:hover {
+      box-shadow: 0 0 6px 0 rgb(116, 116, 116);
+    }
+    img {
+      height: 100%;
+      margin-right: 30px;
+    }
+    .dentist-content {
+      display: flex;
+      height: 90%;
+      width: 97%;
+      position: relative;
+    }
+    #viewtutor_btn {
+      width: 90%;
+      height: 6vh;
+      border: none;
+      background-color: $hover-color;
+      color: white;
+      font-weight: 500;
+      font-size: 15px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    #viewtutor_btn:hover {
+      background-color: #2e89ff;
+    }
+  }
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .dentist-list {
@@ -124,6 +231,38 @@
               height: 100%;
             }
           }
+        }
+      }
+    }
+  }
+  .dentists-page {
+    min-height: calc(100vh - 4em);
+    background: url("https://i.ibb.co/Gn3MBTt/banner-1.jpg") center;
+    background-size: cover;
+    background: white;
+    .dentist-card-container {
+      width: 95%;
+      .dentist-card {
+        width: 100%;
+        height: 100px;
+        .main-view {
+          width: calc(100%);
+          .anme {
+            font-size: 15px;
+          }
+          .intro {
+            display: none;
+          }
+          .expert {
+            margin-top: 0.5em;
+          }
+        }
+        img {
+          margin-right: 10px;
+          height: 100%;
+        }
+        .sub-view {
+          display: none;
         }
       }
     }
@@ -171,6 +310,29 @@
       }
     }
   }
+  .dentists-page {
+    width: 100%;
+    background: url("https://i.ibb.co/Gn3MBTt/banner-1.jpg") center;
+    background-size: cover;
+    background: white;
+    .dentist-card-container {
+      width: 100%;
+      .dentist-card {
+        width: 100%;
+        .main-view {
+          width: calc(100% - 250px);
+        }
+        img {
+          margin-right: 10px;
+          height: 90%;
+        }
+        .sub-view {
+          width: 250px;
+          padding-right: 0;
+        }
+      }
+    }
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -210,6 +372,24 @@
               height: 100%;
             }
           }
+        }
+      }
+    }
+  }
+  .dentists-page {
+    width: 100%;
+    background: url("https://i.ibb.co/Gn3MBTt/banner-1.jpg") center;
+    background-size: cover;
+    background: white;
+    .dentist-card-container {
+      width: 90%;
+      .dentist-card {
+        width: 100%;
+        .main-view {
+          width: calc(100% - 250px);
+        }
+        .sub-view {
+          width: 250px;
         }
       }
     }

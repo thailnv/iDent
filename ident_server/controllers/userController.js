@@ -9,12 +9,10 @@ const { create } = require("lodash");
 const { User } = require("../models/userModel");
 const base = require("./baseController");
 const c = require("../constants");
-const { sendEmail } = require("../middleware/mailService");
+const { sendEmail } = require("../services/mailServices");
 
 const createToken = (user) => {
-  return jwt.sign({ user }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRED_TIME,
-  });
+  return jwt.sign({ user }, process.env.JWT_SECRET);
 };
 
 exports.signup = async (req, res, next) => {
@@ -139,7 +137,7 @@ exports.login = async (req, res, next) => {
 };
 
 exports.forgorPassword = async (req, res) => {
-  console.log("Signup request data: ", req.body);
+  console.log("Reset pass request data: ", req.body);
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return res.status(400).json({

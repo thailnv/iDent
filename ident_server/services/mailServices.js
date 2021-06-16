@@ -64,7 +64,7 @@ iDent`;
   };
 }
 
-const scheduleEmail = async (req, res, next) => {
+const scheduleEmail = async (req, res) => {
   try {
     let { minute, day, month, hour } = req.body;
     let emailMessage = createRemindEmail(req.body);
@@ -72,11 +72,9 @@ const scheduleEmail = async (req, res, next) => {
       await sendEmail(emailMessage).then().catch(err);
     });
     console.log("email scheduled");
-    next();
   } catch (err) {
     console.log(err);
     req.sendEmailErr = true;
-    next();
   }
 };
 module.exports = {

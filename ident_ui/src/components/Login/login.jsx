@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import LoginForm from './child/loginForm';
 import SignupForm from './child/signupForm';
 import { appActions } from '../../actions/appActions';
+import { constants as c } from "../../constants";
 
 function Login() {
 
@@ -14,6 +15,7 @@ function Login() {
   function toggleForm() {
     console.log('toggle form');
     let form = currentForm === 'login' ? 'signup' : 'login';
+    dispatch({ type: c.CLEAR_AUTH_MESSAGE });
     setCurrentForm(form);
   }
 

@@ -14,6 +14,7 @@ function LoginForm(props) {
   });
 
   const [errors, setErrors] = useState({});
+  const [waitingRes, setWaitingRes] = useState(false);
 
   const { email, password } = inputs;
   const dispatch = useDispatch();
@@ -41,6 +42,8 @@ function LoginForm(props) {
       setErrors(error);
       return;
     }
+    dispatch({ type: constants.CLEAR_AUTH_MESSAGE });
+    setWaitingRes(true);
     dispatch(
       userActions.login(email, password)
     );
@@ -76,9 +79,14 @@ function LoginForm(props) {
           onClick={handleSubmit}>
           Login
         </button>
-        {message && <div className="center-text text-error">Email or password incorrect!</div>}
         <div>Don't have an account? <button onClick={props.onToggle}>Register</button> </div>
         <div> <button onClick={forgotPass} style={{ color: "#006eff", }}>Forgot password?</button> </div>
+        {
+          !message && waitingRes && <div className="center-text">
+            <img style={{ width: "16px" }} src="https://i.ibb.co/Z64YB8h/ajax-loader.gif" alt="" />
+          </div>
+        }
+        {message && <div className="center-text text-error">{message}</div>}
         {/* <GoogleLogin /> */}
       </div>
     </form>

@@ -26,7 +26,20 @@ export function application(state = initialState, action) {
         message: "Your appointment was successfully create !",
         popupType: "result",
       };
+    case constants.CANCEL_APPOINTMENT_SUCCESS:
+      return {
+        ...state,
+        message: "Your appointment was successfully delete !",
+        popupType: "result",
+      };
     case constants.MAKE_APPOINTMENT_FAILURE:
+      console.log(action);
+      return {
+        ...state,
+        message: action.message,
+        popupType: "result",
+      };
+    case constants.CANCEL_APPOINTMENT_FAILURE:
       return {
         ...state,
         message: "Something went wrong please try again latter !",

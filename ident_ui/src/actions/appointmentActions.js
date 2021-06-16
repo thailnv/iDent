@@ -31,7 +31,24 @@ function getUserAppointments(id) {
   }
 }
 
+function cancelAppointment(id) {
+  return (dispatch) => {
+    services.cancelAppointment(id).then((res) => {
+      if (res.status === "success") {
+        dispatch(success());
+      } else dispatch(failure(res.message));
+    });
+  };
+  function success() {
+    return { type: c.CANCEL_APPOINTMENT_SUCCESS };
+  }
+  function failure(message) {
+    return { type: c.CANCEL_APPOINTMENT_FAILURE, message };
+  }
+}
+
 export const appointmentActions = {
   makeAppointment,
+  cancelAppointment,
   getUserAppointments,
 };

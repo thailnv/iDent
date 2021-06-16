@@ -24,8 +24,6 @@ function Nav() {
     showSidebar();
   }
 
-  const buttonTitle = user ? 'Logout' : 'Login';
-
   return (
     <div className="nav" style={{ background: 'url("https://i.ibb.co/BKq8KSg/banner-bg.jpg")' }}>
       <div className="logo">
@@ -48,14 +46,23 @@ function Nav() {
           <a href="/dentists" className="dropdown-btn">Our Doctors</a>
         </div>
         <div className="dropdown">
-          <a href="/appointment-list" className="dropdown-btn">Facilities</a>
-        </div>
-        <div className="dropdown">
-          <button
-            id="account-btn"
-            onClick={user ? handleLogoutClick : handleLoginClick}>
-            {buttonTitle}
-          </button>
+          {
+            !user
+              ? <button
+                id="account-btn"
+                onClick={handleLoginClick}>
+                Login
+              </button>
+              :
+              <div className="account-dropdown">
+                <div id="account-btn" className="dropdown-btn account-btn">Account Info +</div>
+                <div className="dropdown-list">
+                  <a href="/record-list" className="dropdown-item">My medical record </a>
+                  <a href="/appointment-list" className="dropdown-item">My appointments</a>
+                  <div onClick={handleLogoutClick} className="dropdown-item">Logout</div>
+                </div>
+              </div>
+          }
         </div>
         <div className="dropdown mobile-display">
           <button onClick={handleShowSidebar}>

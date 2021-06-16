@@ -2,7 +2,7 @@ import { constants } from "../constants";
 
 let user = JSON.parse(localStorage.getItem("user"));
 
-let initialState = user ? { loggedIn: true, user } : {};
+let initialState = user ? { loggedIn: true, user } : { loggedIn: false };
 
 export function authentication(state = initialState, action) {
   switch (action.type) {
@@ -16,6 +16,12 @@ export function authentication(state = initialState, action) {
     case constants.REGISTER_FAILURE:
       return {
         message: action.message,
+      };
+    case constants.CLEAR_AUTH_MESSAGE:
+      console.log("clear");
+      return {
+        ...state,
+        message: "",
       };
     case constants.LOGOUT:
       return {};

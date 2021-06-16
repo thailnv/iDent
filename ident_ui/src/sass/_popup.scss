@@ -1,0 +1,52 @@
+.result-popup {
+  padding: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  max-width: 100vw;
+  background: white;
+  border-radius: 0.25em;
+  text-align: center;
+  button {
+    height: 2.5em;
+    width: 5em;
+    background: $hover-color;
+    color: white;
+    margin-top: 2em;
+  }
+}
+.popup-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(51, 51, 51, 0.26);
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  .confirm-popup {
+    padding: 2em;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    width: fit-content;
+    max-width: 100vw;
+    background: white;
+    border-radius: 0.25em;
+    text-align: center;
+    .yes-btn {
+      height: 2.5em;
+      width: 5em;
+      background: $hover-color;
+      color: white;
+      margin-top: 2em;
+    }
+    .no-btn {
+      height: 2.5em;
+      width: 5em;
+      background: rgb(224, 90, 90);
+      color: white;
+      margin-top: 2em;
+      margin-left: 2em;
+    }
+  }
+}

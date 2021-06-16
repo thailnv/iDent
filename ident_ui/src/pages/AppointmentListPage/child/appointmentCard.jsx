@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function AppointmentCard(props) {
-  let { dentist_name, dentist_img, dentist_degree, service, date, time } = props;
+  let { dentist_name, dentist_img, dentist_degree, service, date, time, status } = props;
   const [customHeight, setHeight] = useState("0px");
   function handleShowDetail() {
     if (customHeight === "0px") {
@@ -27,9 +27,9 @@ export default function AppointmentCard(props) {
           </div>
         </td>
         <td className="status">
-          <div className="complete">
-            Complete
-        </div>
+          <div className={status}>
+            {status}
+          </div>
         </td>
         <td className="service-name">
           {service}
@@ -43,7 +43,9 @@ export default function AppointmentCard(props) {
           </div>
         </td>
         <td className="action">
-          <button>Cancel</button>
+          {
+            status === "expired" ? <div></div> : <button onClick={() => props.handleCancel(props.id)}>Cancel</button>
+          }
         </td>
         <td className="mobile-show">
           <button onClick={handleShowDetail} >
@@ -73,8 +75,8 @@ export default function AppointmentCard(props) {
                   Status:
                 </div>
                 <div className="status">
-                  <div className="complete">
-                    Complete
+                  <div className={status}>
+                    {status}
                   </div>
                 </div>
               </div>
@@ -100,7 +102,7 @@ export default function AppointmentCard(props) {
             <div className="row" style={{ height: "3em" }}>
               <div className="action-info">
                 <div className="action">
-                  <button>
+                  <button onClick={() => props.handleCancel(props.id)}>
                     Cancel
                   </button>
                 </div>

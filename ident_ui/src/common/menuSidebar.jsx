@@ -59,7 +59,7 @@ export default function MenuSidebar() {
           </a>
         </div>
         <button className="sidebar-login-btn" onClick={handleLoginClick}>
-          Đăng nhập
+          Login
         </button>
       </div>
     </div>

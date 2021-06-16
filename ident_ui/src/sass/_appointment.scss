@@ -158,6 +158,7 @@
         }
       }
       .service-name {
+        width: 20%;
         display: block;
         user-select: none;
         min-width: 8em;
@@ -186,6 +187,7 @@
         user-select: none;
         color: white;
         font-size: 13px;
+        text-transform: capitalize;
         .complete {
           width: 100%;
           height: 2em;
@@ -193,6 +195,22 @@
           text-align: center;
           line-height: 2em;
           background: rgb(11, 207, 158);
+        }
+        .pending {
+          width: 100%;
+          height: 2em;
+          border-radius: 0.25em;
+          text-align: center;
+          line-height: 2em;
+          background: rgb(11, 178, 207);
+        }
+        .expired {
+          width: 100%;
+          height: 2em;
+          border-radius: 0.25em;
+          text-align: center;
+          line-height: 2em;
+          background: rgb(233, 126, 64);
         }
       }
       .action {

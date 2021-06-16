@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import { userActions } from "../../../actions/userActions";
+import { constants as c } from "../../../constants";
 import Input from "../../../common/input";
 
 function SignupForm(props) {
@@ -12,6 +13,7 @@ function SignupForm(props) {
   });
 
   const [errors, setErrors] = useState({});
+  const [waitingRes, setWaitingRes] = useState(false);
 
   const { email, password, name } = inputs;
   const dispatch = useDispatch();
@@ -41,6 +43,8 @@ function SignupForm(props) {
       setErrors(error);
       return;
     }
+    setWaitingRes(true);
+    dispatch({ type: c.CLEAR_AUTH_MESSAGE });
     dispatch(
       userActions.register(name, email, password)
     );
@@ -77,8 +81,13 @@ function SignupForm(props) {
           handleChange={handleInputChange}
         />
         <button onClick={handleSubmit} id="signup-btn">Register</button>
-        {message && <div className="center-text text-error">{message}</div>}
         <div className='center-text'>Already have an account? <button onClick={props.onToggle} >Login</button> </div>
+        {
+          !message && waitingRes && <div className="center-text">
+            <img style={{ width: "16px" }} src="https://i.ibb.co/Z64YB8h/ajax-loader.gif" alt="" />
+          </div>
+        }
+        {message && <div className="center-text text-error">{message}</div>}
       </div>
     </form>
   )
