@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { userActions } from '../../../actions/userActions';
-// import GoogleLogin from './googleLogin';
+import GoogleLogin from './googleLogin';
 import { appActions } from '../../../actions/appActions';
 import Input from '../../../common/input';
 import { constants } from '../../../constants';
@@ -87,7 +87,7 @@ function LoginForm(props) {
           </div>
         }
         {message && <div className="center-text text-error">{message}</div>}
-        {/* <GoogleLogin /> */}
+        <GoogleLogin />
       </div>
     </form>
   )
