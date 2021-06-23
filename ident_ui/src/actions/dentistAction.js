@@ -33,7 +33,45 @@ function getDentistSchedule(id) {
   }
 }
 
+function addDentist(dentist) {
+  return (dispatch) => {
+    dentistsServices.addDentist(dentist).then((res) => {
+      if (res.status === "success") {
+        dispatch(success());
+      } else {
+        dispatch(failure(res.message));
+      }
+    });
+  };
+  function success() {
+    return { type: constants.CREATE_DENTIST_SUCCESS };
+  }
+  function failure(message) {
+    return { type: constants.CREATE_DENTIST_FAILURE, message };
+  }
+}
+
+function updateDentist(info) {
+  return (dispatch) => {
+    dentistsServices.updateDentist(info).then((res) => {
+      if (res.status === "success") {
+        dispatch(success());
+      } else {
+        dispatch(failure(res.message));
+      }
+    });
+  };
+  function success() {
+    return { type: constants.UPDATE_DENTIST_SUCCESS };
+  }
+  function failure(message) {
+    return { type: constants.UPDATE_DENTIST_FAILURE, message };
+  }
+}
+
 export const dentistActions = {
+  addDentist,
+  updateDentist,
   getAllDentist,
   getDentistSchedule,
 };

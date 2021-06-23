@@ -59,6 +59,7 @@ function Nav() {
                 <div className="dropdown-list">
                   <a href="/record-list" className="dropdown-item">My medical record </a>
                   <a href="/appointment-list" className="dropdown-item">My appointments</a>
+                  {user.role === "admin" && <a href="/admin" className="dropdown-item">Manager page</a>}
                   <div onClick={handleLogoutClick} className="dropdown-item">Logout</div>
                 </div>
               </div>

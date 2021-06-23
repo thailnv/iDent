@@ -20,8 +20,8 @@ const scheduleSchema = mongoose.Schema({
 function validate(schedule) {
   let schema = joi.object({
     dentist: joi.string().min(5).required(),
-    shifts: joi.array().items(joi.string()).required(),
-    time: joi.array(),
+    shifts: joi.array().items(joi.string()).min(1).required(),
+    time: joi.array().items(joi.number().min(0)),
     day: joi.number().min(1).max(31).required(),
     month: joi.number().min(1).max(12).required(),
     year: joi.number().min(0).required(),

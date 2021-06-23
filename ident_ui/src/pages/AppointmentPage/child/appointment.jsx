@@ -88,6 +88,7 @@ function Appointment() {
 		let year = selectedDay.year;
 		let month = selectedDay.month;
 		let day = selectedDay.day;
+		dispatch({ type: constants.SHOW_LOADING_STATUS });
 		dispatch(appointmentActions.makeAppointment({
 			service: selectedService.serviceID,
 			service_name: selectedService.serviceName,
@@ -180,7 +181,7 @@ function Appointment() {
 						</form>
 					</div>
 					<div className="container">
-						<Calendar selectedDay={selectedDay} handleShiftDisplay={handleShiftDisplay} workingDay={schedule} />
+						<Calendar selectedDay={selectedDay} handleChangeDay={handleShiftDisplay} workingDay={schedule} />
 						<div className="schedule">
 							<div className="shift-display">
 								{

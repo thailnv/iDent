@@ -27,6 +27,7 @@ function AppointmentListPage() {
   function handleConfirmCancel() {
     dispatch(appointmentActions.cancelAppointment(cancelAppointmentID));
     setConfirmPopupStyle("none");
+    dispatch({ type: c.SHOW_LOADING_STATUS });
   }
 
   function handleNotConfirmCancel() {

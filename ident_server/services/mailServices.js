@@ -64,6 +64,24 @@ iDent`;
   };
 }
 
+function createCancelEmail(dentist, date, time, service, customer, email) {
+  let msg = `Dear ${customer},
+
+We regret to inform you that we have to cancel your "${service}" appointment with Dr.${dentist} scheduled at ${time} on ${date}.
+Dr.${dentist} has notified that he could not go to work this day.
+We sincerely apologize for all the inconveniences.
+
+Thank you once again for your consideration.
+
+iDent`;
+  return {
+    subject: "Appoinment canceled.",
+    text: msg,
+    to: email,
+    from: `iDent - Dentistry<${process.env.IDENT_EMAIL}>`,
+  };
+}
+
 const scheduleEmail = async (req, res) => {
   try {
     let { minute, day, month, hour } = req.body;
@@ -79,5 +97,6 @@ const scheduleEmail = async (req, res) => {
 };
 module.exports = {
   scheduleEmail,
+  createCancelEmail,
   sendEmail,
 };

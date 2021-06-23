@@ -44,7 +44,7 @@ export default function AppointmentCard(props) {
         </td>
         <td className="action">
           {
-            status === "expired" ? <div></div> : <button onClick={() => props.handleCancel(props.id)}>Cancel</button>
+            status === "expired" || status === "canceled" ? <div></div> : <button onClick={() => props.handleCancel(props.id)}>Cancel</button>
           }
         </td>
         <td className="mobile-show">

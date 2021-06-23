@@ -13,7 +13,7 @@ router.use(auth.protect);
 router.use(auth.restrictTo("admin"));
 
 router.post("/", validator(validate), dentistController.addOne);
-router.post("/:id", dentistController.updateOne);
+router.put("/:id", validator(validate), dentistController.updateOne);
 router.delete("/:id", dentistController.deleteOne);
 
 module.exports = router;

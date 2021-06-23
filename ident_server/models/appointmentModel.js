@@ -9,7 +9,7 @@ const appointmentSchema = mongoose.Schema(
     shift: { type: mongoose.Schema.Types.ObjectId, ref: "shift" },
     status: {
       type: String,
-      enum: ["pending", "complete", "expired"],
+      enum: ["pending", "complete", "expired", "canceled"],
       default: "pending",
     },
     hour: Number,

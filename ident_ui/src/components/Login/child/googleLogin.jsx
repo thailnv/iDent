@@ -30,11 +30,11 @@ export default function GoogleLogin(props) {
   return (
     <Login
       clientId={CLIENT_ID}
-       render={renderProps => (
-      <div>
-        <GoogleLoginButton onClick={renderProps.onClick}><img style={{width:"20px",marginRight:"20px"}} src="https://i.ibb.co/Vjcxkxf/115615.png"></img><span style={{color:"black",fontSize:"12px"}}>Continute with Google</span></GoogleLoginButton>
-      </div>
-    )}
+      render={renderProps => (
+        <div>
+          <GoogleLoginButton onClick={renderProps.onClick}><img alt="" style={{ width: "20px", marginRight: "20px" }} src="https://i.ibb.co/Vjcxkxf/115615.png"></img><span style={{ color: "black", fontSize: "12px" }}>Continute with Google</span></GoogleLoginButton>
+        </div>
+      )}
       onSuccess={onSuccess}
       onFailure={onFailure}
     />

@@ -723,8 +723,7 @@ button.dropdown-item {
           margin-top: 1.5em;
           font-weight: normal;
           font-style: normal;
-          font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L",
- sans-serif;
+          font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
           color: #474747; }
         .dentist-list .slider-container .card-container .dentist-card .img-container {
           width: 13em;
@@ -744,8 +743,7 @@ button.dropdown-item {
           color: #42d9ff; }
         .dentist-list .slider-container .card-container .dentist-card .dentist-info {
           text-align: center;
-          font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L",
- sans-serif;
+          font-family: "Open Sans", Arial, Helvetica, "Nimbus Sans L", sans-serif;
           font-size: 13px;
           color: #868686;
           line-height: 1.5em;
@@ -1814,7 +1812,8 @@ button.dropdown-item {
         text-align: center;
         line-height: 2em;
         background: #0bb2cf; }
-      .appointment-list-page .main-view .appointment-list .status .expired {
+      .appointment-list-page .main-view .appointment-list .status .expired,
+      .appointment-list-page .main-view .appointment-list .status .canceled {
         width: 100%;
         height: 2em;
         border-radius: 0.25em;
@@ -1884,9 +1883,12 @@ button.dropdown-item {
   padding-top: 3em;
   padding-bottom: 3em;
   max-width: 100vw;
+  min-width: 300px;
   background: white;
   border-radius: 0.25em;
   text-align: center; }
+  .result-popup .result-message::first-letter {
+    text-transform: capitalize; }
   .result-popup button {
     height: 2.5em;
     width: 5em;
@@ -1904,6 +1906,11 @@ button.dropdown-item {
   align-items: center;
   justify-content: center;
   z-index: 3; }
+  .popup-container form {
+    display: block !important; }
+    .popup-container form .form-wraper {
+      height: auto !important;
+      max-height: 70vh; }
   .popup-container .confirm-popup {
     padding: 2em;
     padding-top: 3em;
@@ -1926,6 +1933,275 @@ button.dropdown-item {
       color: white;
       margin-top: 2em;
       margin-left: 2em; }
+
+.admin-page {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  overflow: hidden; }
+  .admin-page .section-nav-wraper {
+    position: absolute;
+    bottom: 4.5em;
+    right: 1em;
+    transition: 0.3s;
+    height: 0;
+    overflow: hidden; }
+    .admin-page .section-nav-wraper button {
+      display: block;
+      margin-left: auto;
+      margin-right: 0;
+      height: 2em;
+      background: #585858;
+      opacity: 0.8;
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+      color: white;
+      margin-top: 0.5em; }
+      .admin-page .section-nav-wraper button a {
+        color: white; }
+    .admin-page .section-nav-wraper button:hover {
+      opacity: 1; }
+  .admin-page .section-nav-wraper-active {
+    height: 100px; }
+  .admin-page .setting-btn {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    width: 3em;
+    height: 3em;
+    font-size: 1em;
+    color: white;
+    border-radius: 100%;
+    background: #585858;
+    opacity: 0.8; }
+  .admin-page .setting-btn:hover {
+    opacity: 1; }
+  .admin-page .admin-section {
+    width: 95%;
+    height: calc(100% - 6em);
+    margin: auto;
+    display: flex;
+    justify-content: space-between; }
+    .admin-page .admin-section .schedule-info form {
+      min-height: auto; }
+    .admin-page .admin-section form {
+      background: white;
+      width: 350px;
+      box-shadow: 0 0 2px 0 #757575;
+      min-height: 420px;
+      padding: 1em; }
+      .admin-page .admin-section form .form-wraper {
+        height: 320px;
+        overflow: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none; }
+        .admin-page .admin-section form .form-wraper > .row > label {
+          width: 5em; }
+      .admin-page .admin-section form .form-wraper::-webkit-scrollbar {
+        display: none; }
+      .admin-page .admin-section form .submit-btn,
+      .admin-page .admin-section form .cancel-btn {
+        width: 5em;
+        height: 2.25em;
+        font-size: 1em;
+        margin: auto;
+        margin-top: 0.5em;
+        display: block;
+        color: white;
+        background: #0080bb; }
+      .admin-page .admin-section form button.cancel-btn {
+        background-color: #b94848; }
+      .admin-page .admin-section form h3 {
+        text-align: center; }
+      .admin-page .admin-section form input {
+        display: block;
+        height: 2.5em;
+        line-height: 2.5em;
+        width: 100%;
+        padding-left: 0.5em; }
+      .admin-page .admin-section form input[type="checkbox"] {
+        height: 1.25em;
+        line-height: 1.25em;
+        width: 1.25em;
+        display: block;
+        margin-right: 1em; }
+      .admin-page .admin-section form input[type="file"] {
+        width: 15em;
+        height: auto;
+        line-height: normal; }
+      .admin-page .admin-section form input[type="text"],
+      .admin-page .admin-section form input[type="number"] {
+        border: 1px solid #333; }
+      .admin-page .admin-section form label {
+        display: block; }
+      .admin-page .admin-section form > label,
+      .admin-page .admin-section form .form-wraper > label {
+        height: 2em;
+        line-height: 2em; }
+      .admin-page .admin-section form .row {
+        align-items: flex-start;
+        justify-content: flex-start;
+        margin-top: 0.5em; }
+      .admin-page .admin-section form > .row {
+        margin-top: 0.5em; }
+        .admin-page .admin-section form > .row label {
+          width: 8em; }
+    .admin-page .admin-section .table-view {
+      width: calc(100% - 350px - 1em);
+      box-shadow: 0 0 2px 0 #757575;
+      height: 420px;
+      padding: 1em; }
+      .admin-page .admin-section .table-view .header {
+        margin-top: 0.25em;
+        display: flex;
+        width: 100%;
+        font-weight: 600;
+        height: 2.25em;
+        align-items: center;
+        border-bottom: 1px solid #757575; }
+      .admin-page .admin-section .table-view .data-row-container {
+        height: calc(100% - 4.5em);
+        overflow-y: scroll; }
+      .admin-page .admin-section .table-view .data-row-container::-webkit-scrollbar {
+        display: none; }
+      .admin-page .admin-section .table-view .data-row {
+        display: flex;
+        height: 2.5em;
+        align-items: center;
+        border-bottom: 1px solid #757575; }
+      .admin-page .admin-section .table-view .name {
+        width: 25%;
+        padding-right: 0.5em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+      .admin-page .admin-section .table-view .level {
+        width: 20%; }
+      .admin-page .admin-section .table-view .number-questions {
+        width: 20%; }
+      .admin-page .admin-section .table-view .time {
+        width: 20%; }
+      .admin-page .admin-section .table-view .action {
+        width: 15%;
+        display: flex; }
+        .admin-page .admin-section .table-view .action button {
+          width: 3.5em;
+          height: 1.75em;
+          color: white; }
+        .admin-page .admin-section .table-view .action .delete-btn {
+          color: #df5d3d;
+          border: 2px solid #afafaf; }
+        .admin-page .admin-section .table-view .action .edit-btn {
+          border: 2px solid #afafaf;
+          color: #21b17a;
+          margin-left: 0.5em; }
+  .admin-page .report-view {
+    width: 95%;
+    margin: auto;
+    height: 8em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .admin-page .report-view .info {
+      width: 20%;
+      min-width: 160px;
+      height: 5em;
+      padding: 0.5em;
+      box-shadow: 0 0 2px 0 #888888;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-end;
+      position: relative; }
+      .admin-page .report-view .info i {
+        font-size: 2em;
+        color: #bebebe; }
+      .admin-page .report-view .info .update-time {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        border-top: 1px #bbbbbb solid;
+        font-size: 12px;
+        font-weight: bold;
+        color: #727272;
+        padding-top: 0.5em; }
+        .admin-page .report-view .info .update-time i {
+          font-size: 12px;
+          margin-right: 0.5em; }
+      .admin-page .report-view .info .icon {
+        position: absolute;
+        width: 3em;
+        height: 3em;
+        line-height: 3em;
+        left: 0.75em;
+        top: -1em;
+        text-align: center;
+        background: #dae262;
+        box-shadow: 0 0 2px 0 #888888; }
+        .admin-page .report-view .info .icon i {
+          font-size: 1em;
+          color: white; }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .admin-page .admin-section {
+    width: 100%;
+    height: calc(100% - 225px); }
+    .admin-page .admin-section form {
+      display: none; }
+    .admin-page .admin-section .table-view {
+      width: 100%;
+      height: calc(100% - 1em);
+      margin-top: 1em;
+      padding-right: 0.5em;
+      padding-left: 0.5em; }
+      .admin-page .admin-section .table-view .number-questions {
+        display: none; }
+      .admin-page .admin-section .table-view .name {
+        width: 40%; }
+      .admin-page .admin-section .table-view .time {
+        display: none; }
+      .admin-page .admin-section .table-view .action {
+        width: 20%; }
+      .admin-page .admin-section .table-view .level {
+        width: 40%; }
+  .admin-page .report-view {
+    width: 100%;
+    flex-wrap: wrap;
+    height: 225px; }
+    .admin-page .report-view .info {
+      width: 48%;
+      margin-top: 2em; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .admin-page .admin-section {
+    width: 100%; }
+    .admin-page .admin-section form {
+      display: none; }
+    .admin-page .admin-section .table-view {
+      width: 100%; }
+  .admin-page .report-view {
+    width: 100%; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .admin-page .admin-section {
+    width: 100%; }
+    .admin-page .admin-section form {
+      width: 300px; }
+    .admin-page .admin-section .table-view {
+      width: calc(100% - 300px - 1em); }
+      .admin-page .admin-section .table-view .number-questions {
+        display: none; }
+      .admin-page .admin-section .table-view .name {
+        width: 35%; }
+      .admin-page .admin-section .table-view .time {
+        width: 25%; }
+      .admin-page .admin-section .table-view .action {
+        width: 20%; }
+  .admin-page .report-view {
+    width: 100%; } }
 
 .App {
   width: 100vw;

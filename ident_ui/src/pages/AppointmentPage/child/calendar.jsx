@@ -32,7 +32,7 @@ function Calendar(props) {
     const [selectedDay, setSelectedDay] = useState("");
 
     function handleChangeDay(e) {
-        props.handleShiftDisplay(e);
+        props.handleChangeDay(e);
     }
 
     function getCalendarDays() {

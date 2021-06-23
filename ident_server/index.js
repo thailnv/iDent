@@ -11,6 +11,7 @@ const degreeRoute = require("./routes/degreeRoute");
 const serviceRoute = require("./routes/serviceRoute");
 const shiftRoute = require("./routes/shiftRoute");
 const scheduleRoute = require("./routes/scheduleRoute");
+const siteRoute = require("./routes/siteRoute");
 const db = require("./config/database");
 
 const app = express();
@@ -43,6 +44,7 @@ app.use("/api/appointments", appointmentRoutes);
 app.use("/api/services", serviceRoute);
 app.use("/api/shifts", shiftRoute);
 app.use("/api/schedules", scheduleRoute);
+app.use("/api", siteRoute);
 
 app.use("*", (req, res) => {
   res.status(400).json({ mesage: "Undefined route !" });

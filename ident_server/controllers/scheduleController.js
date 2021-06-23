@@ -3,6 +3,9 @@ const c = require("../constants");
 const { Schedule } = require("../models/scheduleModel");
 const { Dentist } = require("../models/dentistModel");
 const { Degree } = require("../models/degreeModel");
+const { User } = require("../models/userModel");
+const { Appointment } = require("../models/appointmentModel");
+const { sendEmail, createCancelEmail } = require("../services/mailServices");
 exports.addOne = base.addOne(Schedule);
 exports.getOne = async (req, res, next) => {
   try {
@@ -76,5 +79,62 @@ exports.getAll = async (req, res, next) => {
     next(error);
   }
 };
-exports.updateOne = base.updateOne(Schedule);
+exports.updateOne = async (req, res, next) => {
+  try {
+    const { day, month, year, dentist, shifts } = req.body;
+    let schedule = await Schedule.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (schedule) {
+      let appointments = await Appointment.find({
+        year,
+        month,
+        day,
+        dentist,
+        status: {
+          $nin: ["canceled", "expired"],
+        },
+      })
+        .populate("dentist", "name")
+        .populate("customer", "name")
+        .populate("service", "name");
+      for (let i = 0; i < appointments.length; i++) {
+        if (schedule.shifts.indexOf(appointments[i].shift) === -1) {
+          appointments[i].status = "canceled";
+          await appointments[i].save();
+          let emailMsg = createCancelEmail(
+            appointments[i].dentist.name,
+            `${appointments[i].day}/${appointments[i].month}/${appointments[i].year}`,
+            `${appointments[i].hour}:${appointments[i].minute}`,
+            appointments[i].service.name,
+            appointments[i].customer.name,
+            appointments[i].email
+          );
+          await sendEmail(emailMsg)
+            .then(() => {
+              console.log("Send cancel mail OK");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      }
+      res.status(200).json({
+        status: "success",
+        appointments,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "No schedule found !",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong please try again latter !",
+    });
+  }
+};
 exports.deleteOne = base.deleteOne(Schedule);
