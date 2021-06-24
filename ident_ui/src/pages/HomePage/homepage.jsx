@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import React from 'react';
-
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Nav from '../../common/nav';
 import Footer from '../../common/footer';
 import Banner from './child/banner';
@@ -23,6 +23,7 @@ class HomePage extends Component {
         <Popup />
         <Footer />
         <MenuSidebar />
+        <MessengerCustomerChat pageId = '106706511615997' appId = '318451016440427' />
       </React.Fragment>
     )
   }
