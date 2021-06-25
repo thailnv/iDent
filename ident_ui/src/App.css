@@ -9,7 +9,9 @@
   font-family: roboto, sans-serif; }
 
 body {
-  position: relative; }
+  width: 100%;
+  position: relative;
+  overflow-x: hidden; }
 
 .disable {
   user-select: none;
@@ -399,7 +401,8 @@ button.dropdown-item {
 .banner {
   width: 100%;
   height: 50vh;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
 
 .banner > img {
   width: 100%;
@@ -755,7 +758,8 @@ button.dropdown-item {
   width: 100%;
   background: url("https://i.ibb.co/Gn3MBTt/banner-1.jpg") center;
   background-size: cover;
-  background: white; }
+  background: white;
+  overflow-x: hidden; }
   .dentists-page .dentist-card-container {
     width: 90%;
     margin: auto; }
@@ -883,7 +887,7 @@ button.dropdown-item {
         width: 100%;
         height: 100px; }
         .dentists-page .dentist-card-container .dentist-card .main-view {
-          width: calc(100%); }
+          width: calc(100% - 100px); }
           .dentists-page .dentist-card-container .dentist-card .main-view .anme {
             font-size: 15px; }
           .dentists-page .dentist-card-container .dentist-card .main-view .intro {
@@ -1596,7 +1600,7 @@ button.dropdown-item {
     font-weight: 600;
     font-size: 14px;
     margin: auto;
-    bottom: 5em;
+    bottom: 9em;
     left: calc(50% - 7.5em);
     display: block; }
 
@@ -1614,6 +1618,17 @@ button.dropdown-item {
     overflow: hidden;
     border-bottom: 0.5px #a8a8a8 solid;
     white-space: nowrap; }
+
+#sidebar-modal {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #333;
+  opacity: 0.5;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 4; }
 
 #menuSidebar img {
   width: 15px;
@@ -1934,6 +1949,263 @@ button.dropdown-item {
       margin-top: 2em;
       margin-left: 2em; }
 
+.list_service {
+  padding: 1em;
+  width: 93%;
+  margin: auto;
+  overflow-x: hidden; }
+  .list_service img {
+    height: 100%;
+    margin-right: 30px; }
+
+.service-card {
+  height: 185px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 0 4px 0 #858585;
+  margin-bottom: 15px; }
+  .service-card .main-view {
+    width: calc(100% - 250px);
+    border-right: 1px solid rgba(230, 226, 226, 0.438);
+    position: relative; }
+    .service-card .main-view .name {
+      font-size: 14px; }
+    .service-card .main-view .intro {
+      width: 90%;
+      margin-top: 0.5em;
+      color: #5f5e5e;
+      overflow: hidden;
+      line-height: 1.5em;
+      font-size: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .service-card .main-view .title {
+      width: 90%;
+      font-size: 14px;
+      font-weight: 500;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      color: #22c2df; }
+    .service-card .main-view .expert {
+      margin-top: 1em; }
+  .service-card .sub-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 10px;
+    width: 250px; }
+    .service-card .sub-view .point i {
+      width: 20px;
+      height: 20px;
+      color: #22c2df;
+      margin-right: 10px; }
+    .service-card .sub-view .point {
+      font-size: 12px; }
+    .service-card .sub-view .student,
+    .service-card .sub-view .point span {
+      font-size: 15px;
+      font-weight: bold;
+      color: #555; }
+
+.service-card:hover {
+  box-shadow: 0 0 6px 0 #747474; }
+
+.service-content {
+  display: flex;
+  height: 90%;
+  width: 97%;
+  position: relative; }
+
+#viewtutor_btn {
+  width: 90%;
+  height: 2.5em;
+  border: none;
+  text-align: center;
+  line-height: 2.5em;
+  background-color: #22c2df;
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700; }
+
+#viewtutor_btn:hover {
+  background-color: #2e89ff; }
+
+.service_container {
+  width: 80vw;
+  margin: auto; }
+  .service_container p {
+    color: #777; }
+
+.service_banner {
+  width: 100%;
+  height: 300px;
+  font-weight: bold;
+  font-size: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  background: url("https://dental-clinic.cmsmasters.net/wp-content/uploads/2015/07/content-prlx.jpg");
+  color: white;
+  justify-content: center; }
+
+.service_content {
+  width: 100%;
+  padding: 0 30px;
+  box-sizing: border-box;
+  padding-top: 20px;
+  border-left: 1px solid rgba(192, 192, 192, 0.514); }
+
+.service_content h2 {
+  display: block;
+  width: 90%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.322);
+  position: relative; }
+
+.service_content h2::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 5%;
+  background: #32b8da;
+  height: 2px; }
+
+.service_feature {
+  margin-bottom: 50px; }
+
+.service_feature p {
+  display: block;
+  width: 90%;
+  padding: 10px 0;
+  padding-left: 30px;
+  box-sizing: border-box;
+  line-height: 25px; }
+
+.dot_designed p {
+  display: block;
+  width: 90%;
+  padding-left: 40px;
+  padding-top: 20px;
+  line-height: 25px;
+  position: relative;
+  box-sizing: border-box;
+  padding-bottom: 0; }
+
+.dot_designed p::before {
+  content: "";
+  position: absolute;
+  background-color: #32b8da;
+  border-radius: 100%;
+  height: 7px;
+  width: 7px;
+  top: 27px;
+  left: 20px; }
+
+.border_designed p {
+  position: relative;
+  border-top: 1px solid rgba(128, 128, 128, 0.171);
+  box-sizing: content-box; }
+
+.border_designed p::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 10px;
+  height: 100%;
+  background-color: #32b8da; }
+
+.bold_designed p {
+  display: block;
+  width: 90%;
+  padding-left: 30px;
+  padding-top: 20px;
+  line-height: 25px;
+  font-weight: 600;
+  box-sizing: border-box;
+  padding-bottom: 0; }
+
+.service_feature span {
+  font-weight: bold; }
+
+@media only screen and (max-width: 600px) {
+  p {
+    font-size: 12px;
+    padding: 0; }
+  h2 {
+    font-size: 20px;
+    width: 90vw; }
+  .service_banner {
+    width: 100vw;
+    font-size: 25px; }
+  .service_banner img {
+    width: 40vw; }
+  .service_container {
+    width: 100vw;
+    border: none;
+    box-sizing: border-box; }
+  .service_feature p img {
+    width: 70vw; }
+  .service_banner {
+    display: none; } }
+
+@media only screen and (max-width: 600px) {
+  .list_service {
+    padding: 0;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    min-height: calc(100vh - 4em); }
+  .service-card {
+    width: 100%;
+    height: 100px; }
+    .service-card .main-view {
+      width: calc(100% - 100px); }
+      .service-card .main-view .anme {
+        font-size: 15px; }
+      .service-card .main-view .intro {
+        -webkit-line-clamp: 2; }
+      .service-card .main-view .expert {
+        margin-top: 0.5em; }
+    .service-card img {
+      margin-right: 10px;
+      height: 100%; }
+    .service-card .sub-view {
+      display: none; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .service-card {
+    width: 100%; }
+    .service-card .main-view {
+      width: calc(100% - 250px); }
+    .service-card img {
+      margin-right: 10px;
+      height: 90%; }
+    .service-card .sub-view {
+      width: 250px;
+      padding-right: 0; } }
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .service-card {
+    width: 100%; }
+    .service-card .main-view {
+      width: calc(100% - 250px); }
+    .service-card .sub-view {
+      width: 250px; } }
+
 .admin-page {
   width: 100%;
   height: 100vh;
@@ -1962,7 +2234,7 @@ button.dropdown-item {
     .admin-page .section-nav-wraper button:hover {
       opacity: 1; }
   .admin-page .section-nav-wraper-active {
-    height: 100px; }
+    height: 137px; }
   .admin-page .setting-btn {
     position: absolute;
     bottom: 1em;
@@ -2075,7 +2347,13 @@ button.dropdown-item {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis; }
+      .admin-page .admin-section .table-view .service-time {
+        width: 20%; }
+      .admin-page .admin-section .table-view .rating {
+        width: 15%; }
       .admin-page .admin-section .table-view .level {
+        width: 20%; }
+      .admin-page .admin-section .table-view .status {
         width: 20%; }
       .admin-page .admin-section .table-view .number-questions {
         width: 20%; }
@@ -2160,6 +2438,10 @@ button.dropdown-item {
       .admin-page .admin-section .table-view .name {
         width: 40%; }
       .admin-page .admin-section .table-view .time {
+        display: none; }
+      .admin-page .admin-section .table-view .service-time {
+        display: none; }
+      .admin-page .admin-section .table-view .rating {
         display: none; }
       .admin-page .admin-section .table-view .action {
         width: 20%; }

@@ -93,6 +93,22 @@ export function application(state = initialState, action) {
         popupType: "result",
         willReload: true,
       };
+    case constants.CREATE_SERVICE_SUCCESS:
+      return {
+        ...state,
+        message: "Service was successfully created !",
+        popupType: "result",
+        willReload: true,
+      };
+    case constants.UPDATE_SERVICE_SUCCESS:
+      return {
+        ...state,
+        message: "Service was successfully updated !",
+        popupType: "result",
+        willReload: true,
+      };
+    case constants.UPDATE_SERVICE_FAILURE:
+    case constants.CREATE_SERVICE_FAILURE:
     case constants.ADD_SCHEDULE_FAILURE:
     case constants.UPDATE_SCHEDULE_FAILURE:
       return {

@@ -30,7 +30,7 @@
     }
   }
   .section-nav-wraper-active {
-    height: 100px;
+    height: 137px;
   }
   .setting-btn {
     position: absolute;
@@ -173,7 +173,16 @@
         white-space: nowrap;
         text-overflow: ellipsis;
       }
+      .service-time {
+        width: 20%;
+      }
+      .rating {
+        width: 15%;
+      }
       .level {
+        width: 20%;
+      }
+      .status {
         width: 20%;
       }
       .number-questions {
@@ -279,6 +288,12 @@
           width: 40%;
         }
         .time {
+          display: none;
+        }
+        .service-time {
+          display: none;
+        }
+        .rating {
           display: none;
         }
         .action {

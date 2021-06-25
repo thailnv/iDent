@@ -1,5 +1,1 @@
-export * from "./ServiceListPage"
-export * from "./TeethWhiteningPage"
-export * from "./TeethCleaningPage"
-export * from "./OrthodonicsPage"
-export * from "./DentalAnesthesiaPage"
+export * from "./ServicesPage";

@@ -92,6 +92,7 @@
   background: url("https://i.ibb.co/Gn3MBTt/banner-1.jpg") center;
   background-size: cover;
   background: white;
+  overflow-x: hidden;
   .dentist-card-container {
     > h2 {
       margin-top: 0.75em;
@@ -246,7 +247,7 @@
         width: 100%;
         height: 100px;
         .main-view {
-          width: calc(100%);
+          width: calc(100% - 100px);
           .anme {
             font-size: 15px;
           }

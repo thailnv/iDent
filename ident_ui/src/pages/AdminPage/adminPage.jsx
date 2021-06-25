@@ -6,6 +6,7 @@ import { appActions } from "../../actions/appActions";
 import LoadingDisplay from "../../common/loadingDisplay";
 import ReportView from "./child/reportView";
 import DentistSection from "./child/dentistSection";
+import ServiceSection from "./child/serviceSection";
 import ScheduleSection from "./child/scheduleSection";
 import Popup from "../../components/popup";
 
@@ -28,6 +29,11 @@ function AdminPage() {
       dentists={info ? info.dentists : []}
       shifts={info ? info.shifts : []}
       schedules={info ? info.schedules : []}
+    />,
+    "service": <ServiceSection
+      services={info ? info.services : []}
+      dentists={info ? info.dentists : []}
+      shifts={info ? info.shifts : []}
     />
   }
 
@@ -66,11 +72,14 @@ function AdminPage() {
               />
               {sections[currentSection]}
               <div className={customClass.tab}>
+                <button onClick={() => handleChangeSection("schedule")}>
+                  Schedule Management
+                </button>
+                <button onClick={() => handleChangeSection("service")}>
+                  Service Management
+                </button>
                 <button onClick={() => handleChangeSection("dentist")}>
                   Dentist Management
-                </button>
-                <button onClick={() => handleChangeSection("schedule")}>
-                  Shift Management
                 </button>
                 <button>
                   <a href="/">Home page</a>

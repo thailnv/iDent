@@ -29,7 +29,7 @@ function IdentInNumber(props) {
         </div>
         <div className="container">
           <div className="img-container">
-            <img src="/img/calendar_icon.png" alt="" />
+            <img src="https://i.ibb.co/cFrPCbx/calendar-icon.png" alt="" />
           </div>
           <div className="info">38</div>
           <div className="title">Years of experience</div>

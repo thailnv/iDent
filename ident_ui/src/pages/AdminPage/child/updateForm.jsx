@@ -43,9 +43,10 @@ export default function UpdateForm(props) {
                   <div className="row" key={i}>
                     <input type="checkbox"
                       checked={props.updateInfo.expert.indexOf(v._id) !== -1}
+                      id={v._id + "_up"}
                       onChange={props.handleInputChange} name="expert" value={v._id}
                     />
-                    <label htmlFor="new-250-500">{v.name}</label>
+                    <label htmlFor={v._id + "_up"}>{v.name}</label>
                   </div >
                 )
               }

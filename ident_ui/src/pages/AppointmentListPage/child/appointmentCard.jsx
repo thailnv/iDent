@@ -10,6 +10,7 @@ export default function AppointmentCard(props) {
     }
     setHeight("0px");
   }
+
   return (
     <React.Fragment>
       <tr className="appointment-card">
@@ -102,9 +103,9 @@ export default function AppointmentCard(props) {
             <div className="row" style={{ height: "3em" }}>
               <div className="action-info">
                 <div className="action">
-                  <button onClick={() => props.handleCancel(props.id)}>
-                    Cancel
-                  </button>
+                  {
+                    status === "expired" || status === "canceled" ? <div></div> : <button onClick={() => props.handleCancel(props.id)}>Cancel</button>
+                  }
                 </div>
               </div>
               <div className="time-info">

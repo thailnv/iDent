@@ -16,6 +16,45 @@ function getAllService() {
   }
 }
 
+function createService(service) {
+  return (dispatch) => {
+    serviceServices.createService(service).then((res) => {
+      if (res.status === "success") {
+        dispatch(success());
+      } else {
+        dispatch(failure(res.message));
+      }
+    });
+  };
+
+  function success() {
+    return { type: constants.CREATE_SERVICE_SUCCESS };
+  }
+  function failure(message) {
+    return { type: constants.CREATE_SERVICE_FAILURE, message };
+  }
+}
+
+function updateService(service) {
+  return (dispatch) => {
+    serviceServices.updateService(service).then((res) => {
+      if (res.status === "success") {
+        dispatch(success());
+      } else {
+        dispatch(failure(res.message));
+      }
+    });
+  };
+  function success() {
+    return { type: constants.UPDATE_SERVICE_SUCCESS };
+  }
+  function failure(message) {
+    return { type: constants.UPDATE_SERVICE_FAILURE, message };
+  }
+}
+
 export const serviceActions = {
   getAllService,
+  createService,
+  updateService,
 };

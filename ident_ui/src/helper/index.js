@@ -1,4 +1,5 @@
 function showSidebar() {
+  document.getElementById("sidebar-modal").style.display = "block";
   document.getElementById("menuSidebar").style.width = "300px";
   document
     .getElementById("menuSidebar")
@@ -11,6 +12,7 @@ function closeSidebar() {
   sidebar.style.width = "0";
   sidebar.addEventListener("transitionend", () => {
     if (!sidebar.offsetWidth) {
+      document.getElementById("sidebar-modal").style.display = "none";
       document.body.style.overflow = "auto";
     }
   });
