@@ -5,8 +5,54 @@ const { Dentist } = require("../models/dentistModel");
 const { Degree } = require("../models/degreeModel");
 const { User } = require("../models/userModel");
 const { Appointment } = require("../models/appointmentModel");
-const { sendEmail, createCancelEmail } = require("../services/mailServices");
-exports.addOne = base.addOne(Schedule);
+const {
+  sendEmail,
+  createCancelEmail_DentistOff,
+} = require("../services/mailServices");
+exports.addOne = async (req, res, next) => {
+  const currentDate = new Date();
+  let day = currentDate.getDate();
+  let month = currentDate.getMonth() + 1;
+  let year = currentDate.getFullYear();
+  if (
+    !(req.body.year >= year && req.body.month >= month && req.body.day >= day)
+  ) {
+    res.status(404).json({
+      status: "fail",
+      message: "You can not select day in the past !",
+    });
+    return;
+  }
+  try {
+    const { dentist, day, month, year } = req.body;
+    let schedule = await Schedule.findOne({
+      dentist,
+      day,
+      month,
+      year,
+    });
+    if (schedule) {
+      res.status(400).json({
+        status: "fail",
+        message: "Dentist already have schedule on this day !",
+      });
+      return;
+    }
+
+    const doc = await Schedule.create(req.body);
+
+    res.status(201).json({
+      status: "success",
+      data: doc,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong please try again latter",
+    });
+    next(error);
+  }
+};
 exports.getOne = async (req, res, next) => {
   try {
     let doc = await Schedule.findById(req.params.id)
@@ -102,7 +148,7 @@ exports.updateOne = async (req, res, next) => {
         if (schedule.shifts.indexOf(appointments[i].shift) === -1) {
           appointments[i].status = "canceled";
           await appointments[i].save();
-          let emailMsg = createCancelEmail(
+          let emailMsg = createCancelEmail_DentistOff(
             appointments[i].dentist.name,
             `${appointments[i].day}/${appointments[i].month}/${appointments[i].year}`,
             `${appointments[i].hour}:${appointments[i].minute}`,
@@ -137,4 +183,56 @@ exports.updateOne = async (req, res, next) => {
     });
   }
 };
-exports.deleteOne = base.deleteOne(Schedule);
+exports.deleteOne = async (req, res, next) => {
+  try {
+    let schedule = await Schedule.findByIdAndDelete(req.params.id);
+    const { day, month, year, dentist } = schedule;
+    if (schedule) {
+      let appointments = await Appointment.find({
+        year,
+        month,
+        day,
+        dentist,
+        status: {
+          $nin: ["canceled", "expired"],
+        },
+      })
+        .populate("dentist", "name")
+        .populate("customer", "name")
+        .populate("service", "name");
+      for (let i = 0; i < appointments.length; i++) {
+        appointments[i].status = "canceled";
+        await appointments[i].save();
+        let emailMsg = createCancelEmail_DentistOff(
+          appointments[i].dentist.name,
+          `${appointments[i].day}/${appointments[i].month}/${appointments[i].year}`,
+          `${appointments[i].hour}:${appointments[i].minute}`,
+          appointments[i].service.name,
+          appointments[i].customer.name,
+          appointments[i].email
+        );
+        await sendEmail(emailMsg)
+          .then(() => {
+            console.log("Send cancel mail OK");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      res.status(200).json({
+        status: "success",
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "No schedule found !",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong please try again latter !",
+    });
+  }
+};

@@ -7,7 +7,7 @@ import { constants } from "../../../constants";
 export default function ServiceSection(props) {
 
   const dispatch = useDispatch();
-  const [customClass, setCustomClass] = useState({ confirm: "none", info: "none" })
+  const [customClass, setCustomClass] = useState({ confirm: "none", info: "none", insert: "" })
   const [insertInfo, setInsertInfo] = useState({
     name: "",
     time: "",
@@ -20,7 +20,9 @@ export default function ServiceSection(props) {
     time: "",
     from: 0,
     to: 0,
-    img: ""
+    img: "",
+    status: "",
+    rating: 0
   })
 
   function handleSubmit(e) {
@@ -46,39 +48,65 @@ export default function ServiceSection(props) {
     setCustomClass({ ...customClass, info: "none" });
   }
 
+  function handleInputUpdateChange(e) {
+    const { name, value } = e.target;
+    setUpdateInfo({ ...updateInfo, [name]: value });
+  }
 
   function handleUpdate(e) {
+    e.preventDefault();
+    dispatch({ type: constants.SHOW_LOADING_STATUS });
+    dispatch(serviceActions.updateService(updateInfo));
+  }
+
+  function handleShowInsert() {
+    setCustomClass({ ...customClass, insert: "popup-container flex" });
+  }
+
+  function handleCloseInsert(e) {
+    e.preventDefault()
+    setCustomClass({ ...customClass, insert: "" });
   }
 
   return (
     <div className="admin-section">
-      <div className="form-view">
-        <form>
-          <h3>New service</h3>
-          <div className="form-wraper">
-            <label htmlFor="name">Name:</label>
-            <input onChange={handleInputChange} type="text" name="name" id="name" />
-            <label htmlFor="name">Image:</label>
-            <input onChange={handleInputChange} type="text" name="img" id="img" />
-            <label htmlFor="price">Price:</label>
-            <div className="row" style={{ paddingLeft: "3em" }}>
-              <label htmlFor="form">Form:</label>
-              <input onChange={handleInputChange} type="number" name="from" id="from" />
+      <div className={customClass.insert}>
+        <div className="form-view">
+          <form>
+            <h3>New service</h3>
+            <div className="form-wraper">
+              <label htmlFor="name">Name:</label>
+              <input onChange={handleInputChange} type="text" name="name" id="name" />
+              <label htmlFor="name">Image:</label>
+              <input onChange={handleInputChange} type="text" name="img" id="img" />
+              <label htmlFor="price">Price:</label>
+              <div className="row" style={{ paddingLeft: "3em" }}>
+                <label htmlFor="form">Form:</label>
+                <input onChange={handleInputChange} type="number" name="from" id="from" />
+              </div>
+              <div className="row" style={{ paddingLeft: "3em" }}>
+                <label htmlFor="to">To:</label>
+                <input onChange={handleInputChange} type="number" name="to" id="to" />
+              </div>
+              <label htmlFor="time">Time:</label>
+              <input onChange={handleInputChange} type="number" name="time" id="time" min="0" />
             </div>
-            <div className="row" style={{ paddingLeft: "3em" }}>
-              <label htmlFor="to">To:</label>
-              <input onChange={handleInputChange} type="number" name="to" id="to" />
+            <div className="flex">
+              <button onClick={handleSubmit} className="submit-btn">
+                Lưu
+              </button>
+              <button onClick={handleCloseInsert} className="cancel-btn desktop-hide">
+                Đóng
+              </button>
             </div>
-            <label htmlFor="time">Time:</label>
-            <input onChange={handleInputChange} type="number" name="time" id="time" min="0" />
-          </div>
-          <button onClick={handleSubmit} className="submit-btn">
-            Lưu
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
       <div className="table-view">
-        <h3>Services list</h3>
+        <div style={{ display: "flex" }}>
+          <h3>Services list</h3>
+          <button className="insert-btn" onClick={handleShowInsert}>New +</button>
+        </div>
         <div className="header">
           <div className="name">
             Name
@@ -133,38 +161,76 @@ export default function ServiceSection(props) {
       </div>
       <div className="popup-container" style={{ display: customClass.info }}>
         <div className="info-popup schedule-info">
-          {/* <form>
-            <h3>New service</h3>
+          <form>
+            <h3>Service Information</h3>
             <div className="form-wraper">
-              <label htmlFor="name">Name:</label>
-              <input type="text" name="name" id="name" value={updateInfo.name} />
-              <label htmlFor="name">Image:</label>
-              <input type="text" name="img" id="img" value={updateInfo.img} />
+              <label htmlFor="name_up">Name:</label>
+              <input
+                type="text"
+                name="name"
+                id="name_up"
+                onChange={handleInputUpdateChange}
+                value={updateInfo.name}
+              />
+              <label htmlFor="img_up">Image:</label>
+              <input
+                type="text"
+                name="img"
+                id="img_up"
+                onChange={handleInputUpdateChange}
+                value={updateInfo.img}
+              />
               <label htmlFor="price">Price:</label>
               <div className="row" style={{ paddingLeft: "3em" }}>
-                <label htmlFor="form">Form:</label>
-                <input type="number" name="from" id="from" value={updateInfo.from} />
+                <label htmlFor="form_up">Form:</label>
+                <input
+                  type="number"
+                  name="from"
+                  id="from_up"
+                  onChange={handleInputUpdateChange}
+                  value={updateInfo.from}
+                />
               </div>
               <div className="row" style={{ paddingLeft: "3em" }}>
-                <label htmlFor="to">To:</label>
-                <input type="number" name="to" id="to" value={updateInfo.to} />
+                <label htmlFor="to_up">To:</label>
+                <input
+                  type="number"
+                  name="to"
+                  id="to_up"
+                  onChange={handleInputUpdateChange}
+                  value={updateInfo.to}
+                />
               </div>
-              <label htmlFor="time">Time:</label>
-              <input type="number" name="time" id="time" min="0" value={updateInfo.time} />
+              <label htmlFor="time_up">Time:</label>
+              <input
+                type="number"
+                name="time"
+                id="time_up"
+                onChange={handleInputUpdateChange}
+                value={updateInfo.time}
+              />
               <div className="row">
                 <label>Status:</label>
                 <div>
                   <div className="row">
                     <input type="checkbox"
                       id="serving"
-                      name="status" value="serving" />
-                    <label htmlFor="Serving">Serving</label>
+                      name="status"
+                      value="serving"
+                      onChange={handleInputUpdateChange}
+                      checked={updateInfo.status === "serving"}
+                    />
+                    <label htmlFor="serving">Serving</label>
                   </div >
                   <div className="row">
                     <input type="checkbox"
                       id="stopserving"
-                      name="status" value="stopserving" />
-                    <label htmlFor="Serving">Stop serving</label>
+                      name="status"
+                      value="stop serving"
+                      onChange={handleInputUpdateChange}
+                      checked={updateInfo.status === "stop serving"}
+                    />
+                    <label htmlFor="stopserving">Stop serving</label>
                   </div >
                 </div>
               </div>
@@ -175,7 +241,7 @@ export default function ServiceSection(props) {
               <button onClick={handleUpdate} id="btnSubmit" className="submit-btn">Lưu</button>
               <button onClick={handleCloseInfo} className="cancel-btn">Đóng</button>
             </div>
-          </form> */}
+          </form>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ export default function ScheduleSection(props) {
 
   const dispatch = useDispatch();
   const currentDate = new Date();
-  const [customClass, setCustomClass] = useState({ confirm: "none", info: "none" })
+  const [customClass, setCustomClass] = useState({ confirm: "none", info: "none", insert: "" })
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [insertInfo, setInsertInfo] = useState({
     shifts: [],
@@ -27,7 +27,8 @@ export default function ScheduleSection(props) {
     day: 0,
     month: 0,
     year: 0
-  })
+  });
+  const [deleteID, setDeleteID] = useState("");
   const [newShifts, setNewShifts] = useState([]);
 
   function handleSubmit(e) {
@@ -96,55 +97,89 @@ export default function ScheduleSection(props) {
     dispatch(scheduleActions.updateSchedule(updateInfo));
   }
 
+  function handleDeleteClick(id) {
+    setDeleteID(id);
+    setCustomClass({ ...customClass, confirm: "flex" });
+  }
+
+  function handleConfirmDelete() {
+    setCustomClass({ ...customClass, confirm: "none" });
+    dispatch({ type: constants.SHOW_LOADING_STATUS });
+    dispatch(scheduleActions.deleteSchedule(deleteID));
+  }
+
+  function handleCancelDelete() {
+    setCustomClass({ ...customClass, confirm: "none" });
+  }
+
+  function handleShowInsert() {
+    setCustomClass({ ...customClass, insert: "popup-container flex" });
+  }
+
+  function handleCloseInsert(e) {
+    e.preventDefault()
+    setCustomClass({ ...customClass, insert: "" });
+  }
+
   return (
     <div className="admin-section">
-      <div className="form-view">
-        <form>
-          <h3>New schedule</h3>
-          <div className="form-wraper">
-            <div className="row">
-              <label>Dentist:</label>
-              <div>
-                {
-                  props.dentists.map((v, i) =>
-                    <div className="row" key={i}>
-                      <input type="checkbox"
-                        checked={insertInfo.dentist === v._id}
-                        onChange={handleInputChange}
-                        name="dentist" id={v._id} value={v._id} />
-                      <label htmlFor={v._id}>{v.name}</label>
-                    </div >
-                  )
-                }
+      <div className={customClass.insert}>
+        <div className="form-view">
+          <form>
+            <h3>New schedule</h3>
+            <div className="form-wraper">
+              <div className="row">
+                <label>Dentist:</label>
+                <div>
+                  {
+                    props.dentists.map((v, i) =>
+                      <div className="row" key={i}>
+                        <input type="checkbox"
+                          checked={insertInfo.dentist === v._id}
+                          onChange={handleInputChange}
+                          name="dentist" id={v._id} value={v._id} />
+                        <label htmlFor={v._id}>{v.name}</label>
+                      </div >
+                    )
+                  }
+                </div>
+              </div>
+              <div className="row">
+                <label>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <DatePicker selected={selectedDate} onChange={(date) => handleDateSelect(date)} />
+              </div>
+              <div className="row">
+                <label>Shifts:&nbsp;&nbsp;</label>
+                <div>
+                  {
+                    props.shifts.map((v, i) =>
+                      <div className="row" key={i}>
+                        <input type="checkbox"
+                          onChange={handleInputChange}
+                          name="shift" id={v._id} value={v._id} />
+                        <label htmlFor={v._id}>{`${v.from} - ${v.to}`}</label>
+                      </div >
+                    )
+                  }
+                </div>
               </div>
             </div>
-            <div className="row">
-              <label>Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-              <DatePicker selected={selectedDate} onChange={(date) => handleDateSelect(date)} />
+            <div className="flex">
+              <button onClick={handleSubmit} className="submit-btn">
+                Lưu
+              </button>
+              <button onClick={handleCloseInsert} className="cancel-btn desktop-hide">
+                Đóng
+              </button>
             </div>
-            <div className="row">
-              <label>Shifts:&nbsp;&nbsp;</label>
-              <div>
-                {
-                  props.shifts.map((v, i) =>
-                    <div className="row" key={i}>
-                      <input type="checkbox"
-                        onChange={handleInputChange}
-                        name="shift" id={v._id} value={v._id} />
-                      <label htmlFor={v._id}>{`${v.from} - ${v.to}`}</label>
-                    </div >
-                  )
-                }
-              </div>
-            </div>
-          </div>
-          <button onClick={handleSubmit} className="submit-btn">
-            Lưu
-          </button>
-        </form>
+          </form>
+        </div>
       </div>
       <div className="table-view">
-        <h3>Schedules list</h3>
+        <div style={{ display: "flex" }}>
+          <h3>Schedules list</h3>
+          <button className="insert-btn" onClick={handleShowInsert}>New +</button>
+        </div>
         <div className="header">
           <div className="name">
             Date
@@ -180,6 +215,9 @@ export default function ScheduleSection(props) {
                     {v.dentist.phone}
                   </div>
                   <div className="action">
+                    <button onClick={() => handleDeleteClick(v._id)} className="delete-btn">
+                      <i className="far fa-trash-alt"></i>
+                    </button>
                     <button onClick={() => handleShowInfo(v)} className="edit-btn">
                       <i className="far fa-edit"></i>
                     </button>
@@ -230,6 +268,21 @@ export default function ScheduleSection(props) {
               <button onClick={handleCloseInfo} className="cancel-btn">Đóng</button>
             </div>
           </form>
+        </div>
+      </div>
+      <div className="popup-container" style={{ display: customClass.confirm }}>
+        <div className="confirm-popup">
+          <div>
+            Delete selected schedule ?
+          </div>
+          <div>
+            <button onClick={handleConfirmDelete} className="yes-btn">
+              Yes
+            </button>
+            <button onClick={handleCancelDelete} className="no-btn">
+              No
+            </button>
+          </div>
         </div>
       </div>
     </div>

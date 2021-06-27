@@ -42,7 +42,28 @@ function updateSchedule(schedule) {
     });
 }
 
+function deleteSchedule(id) {
+  const requestOption = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: JSON.parse(localStorage.getItem("token")),
+    },
+  };
+  return fetch(`${c.apiUrl}/schedules/${id}`, requestOption)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return;
+    });
+}
+
 export const scheduleServices = {
   addSchedule,
+  deleteSchedule,
   updateSchedule,
 };

@@ -149,9 +149,9 @@ exports.forgorPassword = async (req, res) => {
 
     let code = await bcrypt.genSalt(10);
     const data = {
-      subject: "iDent - reset password.",
+      subject: "Reset password.",
       to: user.email,
-      from: `Nha khoa iDent <${process.env.IDENT_EMAIL}>`,
+      from: `iDent - Dentistry<${process.env.IDENT_EMAIL}>`,
       html: `<h2 style="color:#777;font-size:20px;font-weight:300">Use this verify code to reset your password</h2>
                 <p>Verify code: ${code}</p>`,
     };

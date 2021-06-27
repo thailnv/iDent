@@ -2,6 +2,7 @@ const c = require("../constants");
 
 exports.deleteOne = (Model) => async (req, res, next) => {
   try {
+    console.log(req.params.id);
     const doc = await Model.findByIdAndDelete(req.params.id);
     if (!doc) {
       res.status(404).json({
@@ -10,9 +11,8 @@ exports.deleteOne = (Model) => async (req, res, next) => {
       });
       return;
     }
-    res.status(204).json({
-      status: c.STATUS_SUCCESS,
-      data: null,
+    res.status(200).json({
+      status: "success",
     });
   } catch (error) {
     res.status(500).json({

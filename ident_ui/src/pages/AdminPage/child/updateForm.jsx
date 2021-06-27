@@ -58,6 +58,27 @@ export default function UpdateForm(props) {
           <label htmlFor="yearExperience">Rating: </label>
           <input readOnly type="number" name="rating" onChange={props.handleInputChange}
             id="rating" value={props.updateInfo.rating} />
+          <div className="row">
+            <label>Status:</label>
+            <div>
+              <div className="row">
+                <input type="checkbox"
+                  id="working"
+                  checked={props.updateInfo.status === "working"}
+                  onChange={props.handleInputChange} name="status" value="working"
+                />
+                <label htmlFor="working">Working</label>
+              </div >
+              <div className="row">
+                <input type="checkbox"
+                  id="stopworking"
+                  checked={props.updateInfo.status === "stop working"}
+                  onChange={props.handleInputChange} name="status" value="stop working"
+                />
+                <label htmlFor="stopworking">Stop working</label>
+              </div >
+            </div>
+          </div>
         </div>
         <div style={{ display: "flex" }}>
           <button onClick={props.handleUpdate} id="btnSubmit" className="submit-btn">Lưu</button>

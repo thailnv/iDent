@@ -85,7 +85,11 @@ input[type="number"] {
 }
 
 .flex {
-  display: flex;
+  display: flex !important;
+}
+
+.desktop-hide {
+  display: none !important;
 }
 
 .close-btn {
@@ -135,5 +139,15 @@ input[type="number"] {
   .mobile-display {
     display: block !important;
     margin-left: 0 !important;
+  }
+  .desktop-hide {
+    display: block !important;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .desktop-hide {
+    display: block !important;
   }
 }

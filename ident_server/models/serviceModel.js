@@ -14,8 +14,8 @@ const serviceSchema = mongoose.Schema(
     img: String,
     status: {
       type: String,
-      enum: ["Serving", "Stop serving"],
-      default: "Serving",
+      enum: ["serving", "stop serving"],
+      default: "serving",
     },
   },
   {

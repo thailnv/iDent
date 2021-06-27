@@ -144,6 +144,14 @@
       box-shadow: 0 0 2px 0 rgb(117, 117, 117);
       height: 420px;
       padding: 1em;
+      .insert-btn {
+        padding: 0.25em;
+        background: rgb(7, 168, 168);
+        color: white;
+        font-weight: 600;
+        display: none;
+        margin-left: 1em;
+      }
       .header {
         margin-top: 0.25em;
         display: flex;
@@ -174,7 +182,7 @@
         text-overflow: ellipsis;
       }
       .service-time {
-        width: 20%;
+        width: 15%;
       }
       .rating {
         width: 15%;
@@ -183,10 +191,12 @@
         width: 20%;
       }
       .status {
-        width: 20%;
+        width: 25%;
+        text-transform: capitalize;
       }
       .number-questions {
         width: 20%;
+        text-transform: capitalize;
       }
       .time {
         width: 20%;
@@ -284,6 +294,9 @@
         .number-questions {
           display: none;
         }
+        .insert-btn {
+          display: block;
+        }
         .name {
           width: 40%;
         }
@@ -326,6 +339,9 @@
       }
       .table-view {
         width: 100%;
+        .insert-btn {
+          display: block;
+        }
       }
     }
     .report-view {
@@ -348,13 +364,19 @@
           display: none;
         }
         .name {
-          width: 35%;
+          width: 30%;
         }
         .time {
           width: 25%;
         }
+        .level {
+          width: 25%;
+        }
         .action {
           width: 20%;
+        }
+        .rating {
+          display: none;
         }
       }
     }

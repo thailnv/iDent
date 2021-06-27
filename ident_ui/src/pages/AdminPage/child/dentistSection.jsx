@@ -11,7 +11,7 @@ import { toggleItem } from "../../../helper";
 export default function DentistSection(props) {
 
   const dispatch = useDispatch();
-  const [customClass, setCustomClass] = useState({ confirm: "none", info: "none" });
+  const [customClass, setCustomClass] = useState({ confirm: "none", info: "none", insert: "" });
   const [updateInfo, setUpdateInfo] = useState({
     name: "",
     img: "",
@@ -53,16 +53,31 @@ export default function DentistSection(props) {
     dispatch(dentistActions.updateDentist(updateInfo));
   }
 
+  function handleShowInsert() {
+    setCustomClass({ ...customClass, insert: "popup-container flex" });
+  }
+
+  function handleCloseInsert(e) {
+    e.preventDefault()
+    setCustomClass({ ...customClass, insert: "" });
+  }
+
   return (
     <div className="admin-section">
-      <div className="form-view">
-        <AddForm
-          services={props.services}
-          degrees={props.degrees}
-        />
+      <div className={customClass.insert}>
+        <div className="form-view">
+          <AddForm
+            services={props.services}
+            degrees={props.degrees}
+            handleCloseForm={handleCloseInsert}
+          />
+        </div>
       </div>
       <div className="table-view">
-        <h3>Dentists list</h3>
+        <div style={{ display: "flex" }}>
+          <h3>Dentists list</h3>
+          <button className="insert-btn" onClick={handleShowInsert}>New +</button>
+        </div>
         <div className="header">
           <div className="name">
             Name
@@ -71,7 +86,7 @@ export default function DentistSection(props) {
             Degree
           </div>
           <div className="number-questions">
-            Patients
+            Status
           </div>
           <div className="time">
             Phone
@@ -92,7 +107,7 @@ export default function DentistSection(props) {
                     {v.degree.name}
                   </div>
                   <div className="number-questions">
-                    {v.patient}
+                    {v.status}
                   </div>
                   <div className="time">
                     {v.phone}

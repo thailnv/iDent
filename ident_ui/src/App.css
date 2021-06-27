@@ -71,7 +71,10 @@ input[type="number"] {
   display: block; }
 
 .flex {
-  display: flex; }
+  display: flex !important; }
+
+.desktop-hide {
+  display: none !important; }
 
 .close-btn {
   top: 0.5em;
@@ -114,7 +117,14 @@ input[type="number"] {
 @media (max-width: 600px) {
   .mobile-display {
     display: block !important;
-    margin-left: 0 !important; } }
+    margin-left: 0 !important; }
+  .desktop-hide {
+    display: block !important; } }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .desktop-hide {
+    display: block !important; } }
 
 .login-container {
   width: 80%;
@@ -2323,6 +2333,13 @@ button.dropdown-item {
       box-shadow: 0 0 2px 0 #757575;
       height: 420px;
       padding: 1em; }
+      .admin-page .admin-section .table-view .insert-btn {
+        padding: 0.25em;
+        background: #07a8a8;
+        color: white;
+        font-weight: 600;
+        display: none;
+        margin-left: 1em; }
       .admin-page .admin-section .table-view .header {
         margin-top: 0.25em;
         display: flex;
@@ -2348,15 +2365,17 @@ button.dropdown-item {
         white-space: nowrap;
         text-overflow: ellipsis; }
       .admin-page .admin-section .table-view .service-time {
-        width: 20%; }
+        width: 15%; }
       .admin-page .admin-section .table-view .rating {
         width: 15%; }
       .admin-page .admin-section .table-view .level {
         width: 20%; }
       .admin-page .admin-section .table-view .status {
-        width: 20%; }
+        width: 25%;
+        text-transform: capitalize; }
       .admin-page .admin-section .table-view .number-questions {
-        width: 20%; }
+        width: 20%;
+        text-transform: capitalize; }
       .admin-page .admin-section .table-view .time {
         width: 20%; }
       .admin-page .admin-section .table-view .action {
@@ -2435,6 +2454,8 @@ button.dropdown-item {
       padding-left: 0.5em; }
       .admin-page .admin-section .table-view .number-questions {
         display: none; }
+      .admin-page .admin-section .table-view .insert-btn {
+        display: block; }
       .admin-page .admin-section .table-view .name {
         width: 40%; }
       .admin-page .admin-section .table-view .time {
@@ -2463,6 +2484,8 @@ button.dropdown-item {
       display: none; }
     .admin-page .admin-section .table-view {
       width: 100%; }
+      .admin-page .admin-section .table-view .insert-btn {
+        display: block; }
   .admin-page .report-view {
     width: 100%; } }
 
@@ -2477,11 +2500,15 @@ button.dropdown-item {
       .admin-page .admin-section .table-view .number-questions {
         display: none; }
       .admin-page .admin-section .table-view .name {
-        width: 35%; }
+        width: 30%; }
       .admin-page .admin-section .table-view .time {
+        width: 25%; }
+      .admin-page .admin-section .table-view .level {
         width: 25%; }
       .admin-page .admin-section .table-view .action {
         width: 20%; }
+      .admin-page .admin-section .table-view .rating {
+        display: none; }
   .admin-page .report-view {
     width: 100%; } }
 

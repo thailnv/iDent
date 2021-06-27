@@ -115,7 +115,10 @@ export default function AddForm(props) {
           </div>
         </div>
       </div>
-      <button className="submit-btn" id="btnSubmit">Lưu</button>
+      <div className="flex" style={{ margin: "auto " }}>
+        <button className="submit-btn" id="btnSubmit">Lưu</button>
+        <button onClick={props.handleCloseForm} className="cancel-btn desktop-hide">Đóng</button>
+      </div>
     </form>
   )
 }

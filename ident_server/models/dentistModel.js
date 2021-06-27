@@ -17,6 +17,11 @@ const dentistSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  status: {
+    type: String,
+    enum: ["working", "stop working"],
+    default: "working",
+  },
   expert: [{ type: mongoose.Schema.Types.ObjectId, ref: "service" }],
 });
 
@@ -32,6 +37,7 @@ const validate = (dentist) => {
       img: joi.string(),
       yearExperience: joi.number().min(0),
       description: joi.string(),
+      status: joi.string(),
       expert: joi.array().items(joi.string()).required(),
     })
     .unknown(true);

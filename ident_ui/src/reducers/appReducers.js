@@ -93,6 +93,13 @@ export function application(state = initialState, action) {
         popupType: "result",
         willReload: true,
       };
+    case constants.DELETE_SCHEDULE_SUCCESS:
+      return {
+        ...state,
+        message: "Schedule was successfully deleted !",
+        popupType: "result",
+        willReload: true,
+      };
     case constants.CREATE_SERVICE_SUCCESS:
       return {
         ...state,
@@ -107,6 +114,7 @@ export function application(state = initialState, action) {
         popupType: "result",
         willReload: true,
       };
+    case constants.DELETE_SCHEDULE_FAILURE:
     case constants.UPDATE_SERVICE_FAILURE:
     case constants.CREATE_SERVICE_FAILURE:
     case constants.ADD_SCHEDULE_FAILURE:

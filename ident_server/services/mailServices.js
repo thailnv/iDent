@@ -64,7 +64,14 @@ iDent`;
   };
 }
 
-function createCancelEmail(dentist, date, time, service, customer, email) {
+function createCancelEmail_DentistOff(
+  dentist,
+  date,
+  time,
+  service,
+  customer,
+  email
+) {
   let msg = `Dear ${customer},
 
 We regret to inform you that we have to cancel your "${service}" appointment with Dr.${dentist} scheduled at ${time} on ${date}.
@@ -77,6 +84,28 @@ iDent`;
   return {
     subject: "Appoinment canceled.",
     text: msg,
+    to: email,
+    from: `iDent - Dentistry<${process.env.IDENT_EMAIL}>`,
+  };
+}
+
+function createCancelEmail_StopService(
+  dentist,
+  date,
+  time,
+  service,
+  customer,
+  email
+) {
+  let msg = `<div>Dear ${customer}, </div><br>
+<div>We regret to inform you that we have to cancel your "${service}" appointment with Dr.${dentist} scheduled at ${time} on ${date}.
+${service} is no longer supported by our dental clinic. </div><br>
+<div>We sincerely apologize for all the inconveniences.</div><br>
+<div>Thank you once again for your consideration.</div><br>
+<div>iDent</div>`;
+  return {
+    subject: "Appoinment canceled.",
+    html: msg,
     to: email,
     from: `iDent - Dentistry<${process.env.IDENT_EMAIL}>`,
   };
@@ -97,6 +126,7 @@ const scheduleEmail = async (req, res) => {
 };
 module.exports = {
   scheduleEmail,
-  createCancelEmail,
+  createCancelEmail_DentistOff,
+  createCancelEmail_StopService,
   sendEmail,
 };
